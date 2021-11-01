@@ -1,14 +1,12 @@
-import { Switch, Route } from 'react-router-dom';
-import EmptyPage from './components/Empty';
-import Login from './pages/Login';
+import { Suspense } from 'react';
+import PrivateRoute from './components/PrivateRoute';
 
 function App(): JSX.Element {
   return (
     <div className="App">
-      <Switch>
-        <Route exact path="/" component={EmptyPage} />
-        <Route exact path="/login" component={Login} />
-      </Switch>
+      <Suspense fallback={<h3>Loading ....</h3>}>
+        <PrivateRoute />
+      </Suspense>
     </div>
   );
 }
