@@ -4,9 +4,9 @@ import { useAppSelector } from '../helpers/utils';
 import selector from '../redux/selectors/selectors';
 
 interface Props {
-  component: React.ElementType;
-  exact: boolean;
-  path: string;
+  component?: React.ElementType;
+  exact?: boolean;
+  path?: string;
 }
 
 export default function PublicRoute({

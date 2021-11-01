@@ -1,5 +1,5 @@
 import { Suspense, lazy } from 'react';
-import { Switch } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import RoleBasedRouting from './components/PrivateRoute';
 import PublicRoute from './components/PublicRoute';
 import { accessUser } from './helpers/constants';
@@ -8,6 +8,7 @@ const AdminPage = lazy(() => import('./pages/AdminPage'));
 const SuperAdminPage = lazy(() => import('./pages/SuperAdminPage'));
 const UserPage = lazy(() => import('./pages/UserPage'));
 const Login = lazy(() => import('./pages/Login'));
+const NotFound = lazy(() => import('./pages/NotFound'));
 
 function App(): JSX.Element {
   return (
@@ -33,6 +34,9 @@ function App(): JSX.Element {
             component={SuperAdminPage}
             roles={accessUser.superAdmin}
           />
+          <Route>
+            <NotFound />
+          </Route>
         </Switch>
       </Suspense>
     </div>
