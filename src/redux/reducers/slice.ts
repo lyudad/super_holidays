@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { User, TypeUserState } from './types';
 
 const initialState: TypeUserState = {
-  user: { _id: 'plc,fpvl', name: 'Alexey', role: 'SUPER' },
+  user: { _id: 'asdssafasf', name: 'User', role: 'employee' },
   isLoggedIn: true
 };
 

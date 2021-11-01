@@ -1,5 +1,5 @@
 export const accessUser = {
-  admin: 'ADMIN',
-  superAdmin: 'SUPER',
-  employee: 'EMPLOYEE'
+  admin: 'admin',
+  superAdmin: 'super',
+  employee: 'employee'
 };

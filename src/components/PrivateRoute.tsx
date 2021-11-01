@@ -1,26 +1,47 @@
-import { lazy } from 'react';
 import Login from '../pages/Login';
-import { accessUser } from '../helpers/constants';
+import { Route, Redirect } from 'react-router';
 import { useAppSelector } from '../helpers/utils';
 import selector from '../redux/selectors/selectors';
+import React from 'react';
 
-const AdminPage = lazy(() => import('../pages/AdminPage'));
-const SuperAdminPage = lazy(() => import('../pages/SuperAdminPage'));
-const UserPage = lazy(() => import('../pages/UserPage'));
+type PrivateRouteProps = {
+  component: React.ElementType;
+  roles: string;
+  exact: boolean;
+  path: string;
+};
 
-export default function PrivateRoute(): JSX.Element {
-  const { user } = useAppSelector(selector.getState);
+export default function RoleBasedRouting({
+  component: Component,
+  roles,
+  ...rest
+}: PrivateRouteProps): JSX.Element {
+  const user = useAppSelector(selector.getUser);
   if (!user) {
-    return <Login />;
+    return (
+      <Route
+        render={() => (
+          <>
+            <Login />
+          </>
+        )}
+      />
+    );
   }
-  switch (user.role) {
-    case accessUser.admin:
-      return <AdminPage />;
-    case accessUser.superAdmin:
-      return <SuperAdminPage />;
-    case accessUser.employee:
-      return <UserPage />;
-    default:
-      return <Login />;
-  }
+  return (
+    <>
+      {roles === user.role ? (
+        <Route
+          {...rest}
+          render={props => (
+            <>
+              <Component {...props} />
+            </>
+          )}
+        />
+      ) : (
+        <Redirect to="/" />
+      )}
+    </>
+  );
 }
