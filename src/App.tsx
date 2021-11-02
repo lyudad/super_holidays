@@ -6,7 +6,6 @@ import { accessUser } from './helpers/constants';
 
 const AdminPage = lazy(() => import('./pages/AdminPage'));
 const UserPage = lazy(() => import('./pages/UserPage'));
-const Login = lazy(() => import('./pages/Login'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 function App(): JSX.Element {
@@ -14,7 +13,7 @@ function App(): JSX.Element {
     <div className="App">
       <Suspense fallback={<h3>Loading ....</h3>}>
         <Switch>
-          <PublicRoute exact path="/" component={Login} />
+          <PublicRoute exact path="/" />
           <RoleBasedRouting
             exact
             path="/admin"
