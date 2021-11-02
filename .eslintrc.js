@@ -34,6 +34,7 @@ module.exports = {
         }
     },
     rules: {
+        '@typescript-eslint/no-explicit-any': 'off',
         'linebreak-style': 'off',
         'prettier/prettier': ['error', {}, { usePrettierrc: true }]
     },

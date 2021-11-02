@@ -1,16 +1,36 @@
+import { Suspense, lazy } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import EmptyPage from './components/Empty';
-import Login from './pages/Login';
-import UsersPage from './pages/UsersPage';
+import RoleBasedRouting from './components/PrivateRoute';
+import PublicRoute from './components/PublicRoute';
+import { accessUser } from './helpers/constants';
+
+const AdminPage = lazy(() => import('./pages/AdminPage'));
+const UserPage = lazy(() => import('./pages/UserPage'));
+const NotFound = lazy(() => import('./pages/NotFound'));
 
 function App(): JSX.Element {
   return (
     <div className="App">
-      <Switch>
-        <Route exact path="/" component={EmptyPage} />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/users" component={UsersPage} />
-      </Switch>
+      <Suspense fallback={<h3>Loading ....</h3>}>
+        <Switch>
+          <PublicRoute exact path="/" />
+          <RoleBasedRouting
+            exact
+            path="/admin"
+            component={AdminPage}
+            roles={[accessUser.admin, accessUser.superAdmin]}
+          />
+          <RoleBasedRouting
+            exact
+            path="/employee"
+            component={UserPage}
+            roles={[accessUser.employee]}
+          />
+          <Route>
+            <NotFound />
+          </Route>
+        </Switch>
+      </Suspense>
     </div>
   );
 }
