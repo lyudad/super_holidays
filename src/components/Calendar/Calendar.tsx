@@ -1,39 +1,31 @@
-import React, { useState } from 'react';
-import { format } from 'date-fns';
-import { enGB } from 'date-fns/locale';
-import { DateRangePickerCalendar, START_DATE } from 'react-nice-dates';
-import 'react-nice-dates/build/style.css';
+import { useState } from 'react';
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
 
-export default function DateRangePickerCalendarExample(): JSX.Element {
-  const [startDate, setStartDate] = useState();
-  const [endDate, setEndDate] = useState();
-  const [focus, setFocus] = useState(START_DATE);
-  const handleFocusChange = (newFocus: any) => {
-    setFocus(newFocus || START_DATE);
-  };
+export default function DataPicker() {
+  const [date, setDate] = useState<Date>(new Date());
+
+  console.log(date);
+
   return (
-    <div>
-      <p>
-        Selected start date:{' '}
-        {startDate
-          ? format(startDate, 'dd MMM yyyy', { locale: enGB })
-          : 'none'}
-        .
-      </p>
-      <p>
-        Selected end date:{' '}
-        {endDate ? format(endDate, 'dd MMM yyyy', { locale: enGB }) : 'none'}.
-      </p>
-      <p>Currently selecting: {focus}.</p>
-      <DateRangePickerCalendar
-        startDate={startDate}
-        endDate={endDate}
-        focus={focus}
-        onStartDateChange={setStartDate}
-        onEndDateChange={setEndDate}
-        onFocusChange={handleFocusChange}
-        locale={enGB}
-      />
+    <div className="app">
+      <h1 className="text-center">React Calendar with Range</h1>
+      <div className="calendar-container">
+        <Calendar onChange={setDate} defaultValue={date} selectRange={true} />
+      </div>
+
+      {/* {date.length > 0 ? (
+        <p className="text-center">
+          <span className="bold">Start:</span> {date[0].toDateString()}
+          &nbsp;|&nbsp;
+          <span className="bold">End:</span> {date[1].toDateString()}
+        </p>
+      ) : (
+        <p className="text-center">
+          <span className="bold">Default selected date:</span>{' '}
+          {date.toDateString()}
+        </p>
+      )} */}
     </div>
   );
 }
