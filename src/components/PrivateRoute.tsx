@@ -1,12 +1,14 @@
-import Login from '../pages/Login';
+import React, { lazy } from 'react';
 import { Route, Redirect } from 'react-router';
 import { useAppSelector } from '../helpers/utils';
 import selector from '../redux/selectors/selectors';
-import React from 'react';
+import { accessUser } from '../helpers/constants';
+
+const Login = lazy(() => import('../pages/Login'));
 
 type PrivateRouteProps = {
   component: React.ElementType;
-  roles: string;
+  roles: Array<string>;
   exact: boolean;
   path: string;
 };
@@ -30,7 +32,7 @@ export default function RoleBasedRouting({
   }
   return (
     <>
-      {roles === user.role ? (
+      {roles.some(e => e === user.role) ? (
         <Route
           {...rest}
           render={props => (
@@ -40,7 +42,7 @@ export default function RoleBasedRouting({
           )}
         />
       ) : (
-        <Redirect to="/" />
+        <Redirect to={accessUser.login} />
       )}
     </>
   );

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
+import { getUserAccess } from '../helpers/constants';
 import { useAppSelector } from '../helpers/utils';
 import selector from '../redux/selectors/selectors';
 
@@ -16,7 +17,7 @@ export default function PublicRoute({
   const { user, isLoggedIn } = useAppSelector(selector.getState);
   return (
     <Route {...routeProps}>
-      {isLoggedIn ? <Redirect to={user ? user.role : '/'} /> : component}
+      {isLoggedIn ? <Redirect to={getUserAccess(user)} /> : component}
     </Route>
   );
 }

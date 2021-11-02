@@ -5,7 +5,6 @@ import PublicRoute from './components/PublicRoute';
 import { accessUser } from './helpers/constants';
 
 const AdminPage = lazy(() => import('./pages/AdminPage'));
-const SuperAdminPage = lazy(() => import('./pages/SuperAdminPage'));
 const UserPage = lazy(() => import('./pages/UserPage'));
 const Login = lazy(() => import('./pages/Login'));
 const NotFound = lazy(() => import('./pages/NotFound'));
@@ -20,19 +19,13 @@ function App(): JSX.Element {
             exact
             path="/admin"
             component={AdminPage}
-            roles={accessUser.admin}
+            roles={[accessUser.admin, accessUser.superAdmin]}
           />
           <RoleBasedRouting
             exact
             path="/employee"
             component={UserPage}
-            roles={accessUser.employee}
-          />
-          <RoleBasedRouting
-            exact
-            path="/super"
-            component={SuperAdminPage}
-            roles={accessUser.superAdmin}
+            roles={[accessUser.employee]}
           />
           <Route>
             <NotFound />
