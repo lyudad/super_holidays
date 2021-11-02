@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import { format } from 'date-fns';
 import { enGB } from 'date-fns/locale';
-import { DateRangePickerCalendar } from 'react-nice-dates';
+import { DateRangePickerCalendar, START_DATE } from 'react-nice-dates';
 import 'react-nice-dates/build/style.css';
 
 export default function DateRangePickerCalendarExample(): JSX.Element {
-  const START_DATE = Date.now();
-  console.log(Date.now().toString());
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
   const [focus, setFocus] = useState(START_DATE);
