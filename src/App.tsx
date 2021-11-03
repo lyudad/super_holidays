@@ -1,8 +1,9 @@
-import DateRangePickerCalendarExample from './components/Calendar/Calendar';
+import ModalCalendar from './components/Modal/Modal';
+
 function App(): JSX.Element {
   return (
     <div className="App">
-      <DateRangePickerCalendarExample />
+      <ModalCalendar />
     </div>
   );
 }

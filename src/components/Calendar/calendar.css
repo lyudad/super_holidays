@@ -1,0 +1,19 @@
+.c1{
+width:800px;
+margin-left: auto;
+margin-right: auto;
+}
+.c2{
+    color:blue;
+}
+.c3{
+    color:salmon
+}
+.c4{
+    font-size: 13px;
+    font-weight: 600;
+    color:black;
+}
+.text-center{
+    text-align: center;
+}

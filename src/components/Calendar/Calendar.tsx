@@ -1,31 +1,36 @@
 import { useState } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
+import './calendar.css';
 
-export default function DataPicker() {
-  const [date, setDate] = useState<Date>(new Date());
-
-  console.log(date);
+export default function DataPicker(): JSX.Element {
+  const [line, setLine] = useState<Date[]>([]);
 
   return (
-    <div className="app">
-      <h1 className="text-center">React Calendar with Range</h1>
+    <div>
       <div className="calendar-container">
-        <Calendar onChange={setDate} defaultValue={date} selectRange={true} />
+        {line.length > 0 ? (
+          <p className="text-center">
+            <span className="bold">Start:</span> {line[0].toDateString()}
+            &nbsp;|&nbsp;
+            <span className="bold">End:</span> {line[1].toDateString()}
+          </p>
+        ) : (
+          <p className="text-center">
+            <span className="bold">Today:</span> {new Date().toDateString()}
+          </p>
+        )}
+        <Calendar
+          onChange={setLine}
+          selectRange={true}
+          className={['c1', 'c2']}
+          tileClassName={['c3', 'c4']}
+          next2Label={null}
+          prev2Label={null}
+          locale="en-GB"
+          navigationAriaLabel="Go up"
+        />
       </div>
-
-      {/* {date.length > 0 ? (
-        <p className="text-center">
-          <span className="bold">Start:</span> {date[0].toDateString()}
-          &nbsp;|&nbsp;
-          <span className="bold">End:</span> {date[1].toDateString()}
-        </p>
-      ) : (
-        <p className="text-center">
-          <span className="bold">Default selected date:</span>{' '}
-          {date.toDateString()}
-        </p>
-      )} */}
     </div>
   );
 }
