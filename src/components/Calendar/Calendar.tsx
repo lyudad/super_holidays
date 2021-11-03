@@ -1,7 +1,17 @@
 import { useState } from 'react';
 import Calendar from 'react-calendar';
+import { AutoComplete } from 'antd';
 import 'react-calendar/dist/Calendar.css';
 import './calendar.css';
+
+const options = [
+  {
+    value: 'seek leave'
+  },
+  {
+    value: 'vocation'
+  }
+];
 
 export default function DataPicker(): JSX.Element {
   const [line, setLine] = useState<Date[]>([]);
@@ -31,6 +41,13 @@ export default function DataPicker(): JSX.Element {
           navigationAriaLabel="Go up"
         />
       </div>
+      <AutoComplete
+        style={{
+          width: 200
+        }}
+        options={options}
+        placeholder="vocation"
+      />
     </div>
   );
 }
