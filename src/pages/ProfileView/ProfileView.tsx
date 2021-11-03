@@ -1,9 +1,9 @@
 import { useState } from 'react';
 
-import AppMenu from '../../components/AppMenu';
-import NavBar from '../../components/NavBar';
-import SideBar from '../../components/SideBar';
-import ProfileTable from '../../components/ProfileTable';
+import AppMenu from 'components/AppMenu';
+import NavBar from 'components/NavBar';
+import SideBar from 'components/SideBar';
+import ProfileTable from 'components/ProfileTable';
 
 import { LogoutOutlined } from '@ant-design/icons';
 
