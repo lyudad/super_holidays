@@ -4,8 +4,11 @@ import RoleBasedRouting from './components/PrivateRoute';
 import PublicRoute from './components/PublicRoute';
 import { accessUser } from './helpers/constants';
 
+import 'antd/dist/antd.css';
+
+const ProfilePage = lazy(() => import('./pages/ProfileView'));
 const AdminPage = lazy(() => import('./pages/AdminPage'));
-const UserPage = lazy(() => import('./pages/UserPage'));
+const UserView = lazy(() => import('./pages/UsersView'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 function App(): JSX.Element {
@@ -22,8 +25,14 @@ function App(): JSX.Element {
           />
           <RoleBasedRouting
             exact
+            path="/profile"
+            component={ProfilePage}
+            roles={[accessUser.employee]}
+          />
+          <RoleBasedRouting
+            exact
             path="/employee"
-            component={UserPage}
+            component={UserView}
             roles={[accessUser.employee]}
           />
           <Route>
