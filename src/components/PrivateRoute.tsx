@@ -4,7 +4,7 @@ import { useAppSelector } from '../helpers/utils';
 import selector from '../redux/selectors/selectors';
 import { accessUser } from '../helpers/constants';
 
-const Login = lazy(() => import('../pages/Login'));
+const Login = lazy(() => import('../pages/LoginView'));
 
 interface PrivateRouteProps {
   component: React.ElementType;

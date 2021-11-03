@@ -4,8 +4,10 @@ import RoleBasedRouting from './components/PrivateRoute';
 import PublicRoute from './components/PublicRoute';
 import { accessUser } from './helpers/constants';
 
-const AdminPage = lazy(() => import('./pages/AdminPage'));
-const UserPage = lazy(() => import('./pages/UserPage'));
+import 'antd/dist/antd.css';
+
+const UserPage = lazy(() => import('./pages/UserView'));
+const AdminPage = lazy(() => import('./pages/AdminView'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 function App(): JSX.Element {

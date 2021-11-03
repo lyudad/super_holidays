@@ -4,7 +4,7 @@ import { getUserAccess } from '../helpers/constants';
 import { useAppSelector } from '../helpers/utils';
 import selector from '../redux/selectors/selectors';
 
-const Login = lazy(() => import('../pages/Login'));
+const Login = lazy(() => import('../pages/LoginView'));
 
 interface Props {
   exact?: boolean;
