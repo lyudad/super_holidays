@@ -6,12 +6,12 @@ import { accessUser } from '../helpers/constants';
 
 const Login = lazy(() => import('../pages/Login'));
 
-type PrivateRouteProps = {
+interface PrivateRouteProps {
   component: React.ElementType;
   roles: Array<string>;
   exact: boolean;
   path: string;
-};
+}
 
 export default function RoleBasedRouting({
   component: Component,
