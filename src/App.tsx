@@ -20,8 +20,14 @@ function App(): JSX.Element {
             exact
             path="/admin"
             component={AdminPage}
-            roles={[accessUser.admin, accessUser.superAdmin]}
+            roles={[accessUser.employee]}
           />
+          {/* <RoleBasedRouting
+            exact
+            path="/admin"
+            component={AdminPage}
+            roles={[accessUser.admin, accessUser.superAdmin]}
+          /> */}
           <RoleBasedRouting
             exact
             path="/employee"
