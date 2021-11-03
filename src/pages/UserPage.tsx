@@ -19,11 +19,11 @@ export default function UserPage(): JSX.Element {
           ></Menu>
         </Header>
         <Content style={{ padding: '0 50px' }}>
-          <Breadcrumb style={{ margin: '16px 0' }}>
+          {/* <Breadcrumb style={{ margin: '16px 0' }}>
             <Breadcrumb.Item>Home</Breadcrumb.Item>
             <Breadcrumb.Item>List</Breadcrumb.Item>
             <Breadcrumb.Item>App</Breadcrumb.Item>
-          </Breadcrumb>
+          </Breadcrumb> */}
           <Layout style={{ padding: '24px 0' }}>
             <Sider className="site-layout-background" width={200}>
               <Menu
@@ -42,9 +42,7 @@ export default function UserPage(): JSX.Element {
             </Content>
           </Layout>
         </Content>
-        <Footer style={{ textAlign: 'center' }}>
-          Ant Design ©2018 Created by Ant UED
-        </Footer>
+        <Footer style={{ textAlign: 'center' }}>super_holydays 2021</Footer>
       </Layout>
     </>
   );
