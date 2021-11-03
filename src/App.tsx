@@ -6,9 +6,8 @@ import { accessUser } from './helpers/constants';
 
 import 'antd/dist/antd.css';
 
-const ProfilePage = lazy(() => import('./pages/ProfileView'));
-const AdminPage = lazy(() => import('./pages/AdminPage'));
-const UserView = lazy(() => import('./pages/UsersView'));
+const UserPage = lazy(() => import('./pages/UserView'));
+const AdminPage = lazy(() => import('./pages/AdminView'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 function App(): JSX.Element {
@@ -25,14 +24,8 @@ function App(): JSX.Element {
           />
           <RoleBasedRouting
             exact
-            path="/profile"
-            component={ProfilePage}
-            roles={[accessUser.employee]}
-          />
-          <RoleBasedRouting
-            exact
             path="/employee"
-            component={UserView}
+            component={UserPage}
             roles={[accessUser.employee]}
           />
           <Route>

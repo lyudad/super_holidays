@@ -1,7 +1,7 @@
-import React from 'react';
+// import React from 'react';
 //import styled from 'styled-components';
-import { Row, Col } from 'antd';
-import 'antd/dist/antd.css';
+// import { Row, Col } from 'antd';
+// import 'antd/dist/antd.css';
 
 // const UsersTableWrapper = styled.div`
 //   margin-top: 10%;
@@ -10,8 +10,8 @@ import 'antd/dist/antd.css';
 //   background-color: #e6ebe7;
 // `;
 
-const UsersPage = () => {
-  return <div>Users Page</div>;
+const UsersPage = (): JSX.Element => {
+  return <div>Admin View</div>;
 };
 
 export default UsersPage;

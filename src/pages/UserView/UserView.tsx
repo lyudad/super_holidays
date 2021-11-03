@@ -11,7 +11,7 @@ import { Button, Layout, Row, Col } from 'antd';
 
 import { StyledContent, StyledLayout } from './styles';
 
-const ProfileView = () => {
+const ProfileView = (): JSX.Element => {
   const [selectedKey, setSelectedKey] = useState<string>('0');
 
   const changeSelectedKey = (event: any) => {
