@@ -1,7 +1,9 @@
+import UserPage from './UserPage';
+
 export default function AdminPage(): JSX.Element {
   return (
     <>
-      <h2>Admin</h2>
+      <UserPage />
     </>
   );
 }
