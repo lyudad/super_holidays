@@ -1,8 +1,10 @@
 import { useState } from 'react';
+import { Data } from './types';
+import { FIRST_PAGE, PAGE_SIZE } from './const';
 
 import { Table } from 'antd';
 
-const dataE = [
+const dataExample = [
   {
     key: '1',
     month: 'July 2021',
@@ -48,9 +50,9 @@ const dataE = [
 ];
 
 const ProfileTable = () => {
-  const [data, setData] = useState(dataE);
-  const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(10);
+  const [data, setData] = useState<Data[]>(dataExample);
+  const [page, setPage] = useState<number>(FIRST_PAGE);
+  const [pageSize, setPageSize] = useState<number>(PAGE_SIZE);
 
   const columns = [
     {

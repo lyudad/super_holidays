@@ -1,13 +1,9 @@
 import { useState } from 'react';
+import { Props } from './types';
 
 import { MenuOutlined } from '@ant-design/icons';
-
+import logo from 'images/logo.svg';
 import { StyledDrawer, StyledButton, Nav } from './styles';
-import logo from '../../logo.svg';
-
-interface Props {
-  menu: JSX.Element;
-}
 
 const NavBar = ({ menu }: Props) => {
   const [visible, setVisible] = useState(false);

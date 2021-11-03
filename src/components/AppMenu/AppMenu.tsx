@@ -1,4 +1,5 @@
 import React from 'react';
+import { Props } from './types';
 
 import { Menu } from 'antd';
 import {
@@ -6,11 +7,6 @@ import {
   UserOutlined,
   AppstoreOutlined
 } from '@ant-design/icons';
-
-interface Props {
-  selectedKey: string;
-  changeSelectedKey: (event: any) => void;
-}
 
 const AppMenu = ({ selectedKey, changeSelectedKey }: Props) => {
   return (

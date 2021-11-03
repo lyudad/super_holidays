@@ -12,7 +12,7 @@ import { Button, Layout, Row, Col } from 'antd';
 import { StyledContent, StyledLayout } from './styles';
 
 const ProfileView = () => {
-  const [selectedKey, setSelectedKey] = useState('0');
+  const [selectedKey, setSelectedKey] = useState<string>('0');
 
   const changeSelectedKey = (event: any) => {
     const key = event.key;

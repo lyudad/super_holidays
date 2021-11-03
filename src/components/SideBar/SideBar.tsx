@@ -1,10 +1,7 @@
 import React from 'react';
+import { Props } from './types';
 
 import { StyledSider } from './styles';
-
-interface Props {
-  menu: JSX.Element;
-}
 
 const SideBar = ({ menu }: Props) => {
   return (
