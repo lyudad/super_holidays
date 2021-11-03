@@ -17,12 +17,17 @@ function App(): JSX.Element {
       <Suspense fallback={<h3>Loading ....</h3>}>
         <Switch>
           <PublicRoute exact path="/" />
-          <Route path="/profile" component={ProfilePage} />
           <RoleBasedRouting
             exact
             path="/admin"
             component={AdminPage}
             roles={[accessUser.admin, accessUser.superAdmin]}
+          />
+          <RoleBasedRouting
+            exact
+            path="/profile"
+            component={ProfilePage}
+            roles={[accessUser.employee]}
           />
           <RoleBasedRouting
             exact
