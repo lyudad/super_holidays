@@ -9,6 +9,7 @@ import 'antd/dist/antd.css';
 const UserPage = lazy(() => import('./pages/UserView'));
 const AdminPage = lazy(() => import('./pages/AdminView'));
 const NotFound = lazy(() => import('./pages/NotFound'));
+const AdminView = lazy(() => import('./pages/AdminView/AdminView'));
 
 function App(): JSX.Element {
   return (
@@ -16,18 +17,13 @@ function App(): JSX.Element {
       <Suspense fallback={<h3>Loading ....</h3>}>
         <Switch>
           <PublicRoute exact path="/" />
+          <Route path="/test" component={AdminView} />
           <RoleBasedRouting
             exact
             path="/admin"
             component={AdminPage}
-            roles={[accessUser.employee]}
-          />
-          {/* <RoleBasedRouting
-            exact
-            path="/admin"
-            component={AdminPage}
             roles={[accessUser.admin, accessUser.superAdmin]}
-          /> */}
+          />
           <RoleBasedRouting
             exact
             path="/employee"
