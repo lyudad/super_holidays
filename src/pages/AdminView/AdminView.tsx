@@ -1,51 +1,55 @@
-import { Layout, Menu, Button, Row, Col } from 'antd';
-import 'antd/dist/antd.css';
-//import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
-//import styled from 'styled-components';
-const { SubMenu } = Menu;
-const { Header, Content, Footer, Sider } = Layout;
-import UserPageTable from '../../components/UserTable/UserPageTable';
+import { useState } from 'react';
 
-export default function UserPage(): JSX.Element {
-  return (
+import AppMenu from 'components/AppMenu';
+import NavBar from 'components/NavBar';
+import SideBar from 'components/SideBar';
+//import UserPageTable from 'components/UserTable/UserPageTable';
+import AdminTable from 'components/AdminTable/AdminTable';
+import { LogoutOutlined } from '@ant-design/icons';
+
+import { Button, Layout, Row, Col } from 'antd';
+
+import { StyledContent, StyledLayout } from './styles';
+
+const ProfileView = (): JSX.Element => {
+  const [selectedKey, setSelectedKey] = useState<string>('0');
+
+  const changeSelectedKey = (event: any) => {
+    const key = event.key;
+    setSelectedKey(key);
+  };
+
+  const Menu = (
     <>
-      <Layout>
-        <Header className="header">
-          <div className="logo" />
-          <Menu
-            theme="dark"
-            mode="horizontal"
-            defaultSelectedKeys={['2']}
-          ></Menu>
-        </Header>
-        <Content style={{ padding: '0 50px' }}>
-          <Layout style={{ padding: '24px 0' }}>
-            <Sider className="site-layout-background" width={200}>
-              <Menu
-                mode="inline"
-                defaultSelectedKeys={['1']}
-                defaultOpenKeys={['sub1']}
-                style={{ height: '100%' }}
-              >
-                <SubMenu key="sub1" title="subnav 1">
-                  <Menu.Item key="1">option1</Menu.Item>
-                </SubMenu>
-              </Menu>
-            </Sider>
-            <Content style={{ padding: '0 24px', minHeight: 280 }}>
-              <Row justify="end" style={{ marginBottom: '30px' }}>
-                <Col sm={8} md={5} lg={4} xl={3}>
-                  <Button type="primary" block>
-                    Add
-                  </Button>
-                </Col>
-              </Row>
-              <UserPageTable />
-            </Content>
-          </Layout>
-        </Content>
-        <Footer style={{ textAlign: 'center' }}>super_holydays 2021</Footer>
-      </Layout>
+      <AppMenu
+        selectedKey={selectedKey}
+        changeSelectedKey={changeSelectedKey}
+      />
+      <Button block>
+        Log out <LogoutOutlined />
+      </Button>
     </>
   );
-}
+
+  return (
+    <StyledLayout>
+      <NavBar menu={Menu} />
+      <Layout>
+        <SideBar menu={Menu} />
+        <StyledContent>
+          <Row justify="end" style={{ marginBottom: '30px' }}>
+            <Col sm={8} md={5} lg={4} xl={3}>
+              <Button type="primary" block>
+                Add
+              </Button>
+            </Col>
+          </Row>
+          {/* <UserPageTable /> */}
+          <AdminTable />
+        </StyledContent>
+      </Layout>
+    </StyledLayout>
+  );
+};
+
+export default ProfileView;
