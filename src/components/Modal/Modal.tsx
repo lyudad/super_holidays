@@ -2,8 +2,12 @@ import React, { useState } from 'react';
 import { Modal, Button } from 'antd';
 import Calendar from '../Calendar';
 
+const day: Date = new Date();
+
+type Visible = boolean;
+
 export default function ModalCalendar(): JSX.Element {
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState<Visible>(false);
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -22,7 +26,7 @@ export default function ModalCalendar(): JSX.Element {
         Open calendar
       </Button>
       <Modal visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-        <Calendar />
+        <Calendar dayToDay={day} />
       </Modal>
     </div>
   );

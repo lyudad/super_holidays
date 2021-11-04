@@ -1,8 +1,6 @@
-import React from 'react';
-
 import { Row, Col, Form, Input, Button } from 'antd';
 
-const Login = () => {
+export default function (): JSX.Element {
   const onFinish = () => {
     console.log('Success:');
   };
@@ -45,6 +43,4 @@ const Login = () => {
       </Col>
     </Row>
   );
-};
-
-export default Login;
+}

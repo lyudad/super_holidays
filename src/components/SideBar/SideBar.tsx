@@ -3,7 +3,7 @@ import { Props } from './types';
 
 import { StyledSider } from './styles';
 
-const SideBar = ({ menu }: Props) => {
+export default function ({ menu }: Props): JSX.Element {
   return (
     <StyledSider
       breakpoint={'lg'}
@@ -14,6 +14,4 @@ const SideBar = ({ menu }: Props) => {
       {menu}
     </StyledSider>
   );
-};
-
-export default SideBar;
+}

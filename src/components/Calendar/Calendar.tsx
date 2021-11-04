@@ -1,34 +1,28 @@
 import { useState } from 'react';
 import Calendar from 'react-calendar';
-import { AutoComplete } from 'antd';
+import { Select } from 'antd';
+import { InputWrapper } from './styles';
 import 'react-calendar/dist/Calendar.css';
 import './calendar.css';
+interface DataPickerPropsProps {
+  dayToDay: Date;
+}
 
-const options = [
-  {
-    value: 'seek leave'
-  },
-  {
-    value: 'vocation'
-  }
-];
-
-export default function DataPicker(): JSX.Element {
+export default function DataPicker({
+  dayToDay
+}: DataPickerPropsProps): JSX.Element {
   const [line, setLine] = useState<Date[]>([]);
 
   return (
     <div>
       <div className="calendar-container">
         {line.length > 0 ? (
-          <p className="text-center">
-            <span className="bold">Start:</span> {line[0].toDateString()}
-            &nbsp;|&nbsp;
-            <span className="bold">End:</span> {line[1].toDateString()}
-          </p>
+          <>
+            <InputWrapper defaultValue="start" value={line[0].toDateString()} />
+            <InputWrapper defaultValue="end" value={line[1].toDateString()} />
+          </>
         ) : (
-          <p className="text-center">
-            <span className="bold">Today:</span> {new Date().toDateString()}
-          </p>
+          <InputWrapper defaultValue="today" value={dayToDay.toDateString()} />
         )}
         <Calendar
           onChange={setLine}
@@ -41,13 +35,10 @@ export default function DataPicker(): JSX.Element {
           navigationAriaLabel="Go up"
         />
       </div>
-      <AutoComplete
-        style={{
-          width: 200
-        }}
-        options={options}
-        placeholder="vocation"
-      />
+      <Select defaultValue="Vacation" style={{ width: '30%' }}>
+        <Select.Option value="Vacation">Vacation</Select.Option>
+        <Select.Option value="Sick leave">Sick leave </Select.Option>
+      </Select>
     </div>
   );
 }
