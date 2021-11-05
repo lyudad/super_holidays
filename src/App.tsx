@@ -17,7 +17,7 @@ function App(): JSX.Element {
       <Suspense fallback={<h3>Loading ....</h3>}>
         <Switch>
           <PublicRoute exact path="/" />
-          <Route path="/test" component={AdminView} />
+          <Route path="/dashbord" component={AdminView} />
           <RoleBasedRouting
             exact
             path="/admin"

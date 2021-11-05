@@ -3,14 +3,13 @@ import { useState } from 'react';
 import AppMenu from 'components/AppMenu';
 import NavBar from 'components/NavBar';
 import SideBar from 'components/SideBar';
-//import UserPageTable from 'components/UserTable/UserPageTable';
 import AdminTable from 'components/AdminTable/AdminTable';
 import { LogoutOutlined } from '@ant-design/icons';
 
 import { Button, Layout, Row, Col } from 'antd';
 
 import { StyledContent, StyledLayout } from './styles';
-import { logOut } from 'helpers/eng';
+import { eng } from 'helpers/eng';
 
 const ProfileView = (): JSX.Element => {
   const [selectedKey, setSelectedKey] = useState<string>('0');
@@ -27,7 +26,7 @@ const ProfileView = (): JSX.Element => {
         changeSelectedKey={changeSelectedKey}
       />
       <Button block>
-        {logOut} <LogoutOutlined />
+        {eng.button_logOut} <LogoutOutlined />
       </Button>
     </>
   );
@@ -41,11 +40,10 @@ const ProfileView = (): JSX.Element => {
           <Row justify="end" style={{ marginBottom: '30px' }}>
             <Col sm={8} md={5} lg={4} xl={3}>
               <Button type="primary" block>
-                Add
+                {eng.button__add}
               </Button>
             </Col>
           </Row>
-          {/* <UserPageTable /> */}
           <AdminTable />
         </StyledContent>
       </Layout>

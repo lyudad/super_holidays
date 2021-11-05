@@ -34,17 +34,19 @@ export const data = [
   }
 ];
 
+const blockBtn = 'block';
+const unblockBtn = 'unblock';
+
 export const columns = [
   { title: 'User', dataIndex: 'name', key: 'name' },
   { title: 'Dates', dataIndex: 'dates', key: 'data' },
   { title: 'Type', dataIndex: 'type', key: 'type' },
-  // { title: 'Address', dataIndex: 'address', key: 'address' },
   {
     title: 'Action',
     dataIndex: '',
     key: 'x',
     render: (block: boolean) => {
-      return <p>{block ? 'block' : 'unblock'}</p>;
+      return <p>{block ? blockBtn : unblockBtn}</p>;
     }
   }
 ];
