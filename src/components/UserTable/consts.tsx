@@ -32,3 +32,21 @@ export const data = [
     description: 'My name is user, I am  developer an i have 32 rest days.'
   }
 ];
+
+export const columns = [
+  { title: 'User', dataIndex: 'name', key: 'name' },
+  {
+    title: 'Action',
+    dataIndex: '',
+    key: 'x',
+    render: () => <a>Edit</a>,
+    edit: () => <a>Block</a>
+  },
+  {
+    title: 'Block',
+    dataIndex: '',
+    onClick: () => alert('!'),
+    key: 'x',
+    render: () => <a>Block</a>
+  }
+];

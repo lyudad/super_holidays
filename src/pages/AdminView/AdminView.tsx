@@ -10,6 +10,7 @@ import { LogoutOutlined } from '@ant-design/icons';
 import { Button, Layout, Row, Col } from 'antd';
 
 import { StyledContent, StyledLayout } from './styles';
+import { logOut } from 'helpers/eng';
 
 const ProfileView = (): JSX.Element => {
   const [selectedKey, setSelectedKey] = useState<string>('0');
@@ -26,7 +27,7 @@ const ProfileView = (): JSX.Element => {
         changeSelectedKey={changeSelectedKey}
       />
       <Button block>
-        Log out <LogoutOutlined />
+        {logOut} <LogoutOutlined />
       </Button>
     </>
   );
