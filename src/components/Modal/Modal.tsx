@@ -1,0 +1,33 @@
+import React, { useState } from 'react';
+import { Modal, Button } from 'antd';
+import Calendar from '../Calendar';
+
+const day: Date = new Date();
+
+type Visible = boolean;
+
+export default function ModalCalendar(): JSX.Element {
+  const [isModalVisible, setIsModalVisible] = useState<Visible>(false);
+
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleOk = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
+  return (
+    <div>
+      <Button type="primary" onClick={showModal}>
+        Open calendar
+      </Button>
+      <Modal visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+        <Calendar dayToDay={day} />
+      </Modal>
+    </div>
+  );
+}

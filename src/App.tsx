@@ -10,7 +10,7 @@ const UserPage = lazy(() => import('./pages/UserView'));
 const AdminPage = lazy(() => import('./pages/AdminView'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
-function App(): JSX.Element {
+export default function App(): JSX.Element {
   return (
     <div className="App">
       <Suspense fallback={<h3>Loading ....</h3>}>
@@ -36,4 +36,3 @@ function App(): JSX.Element {
     </div>
   );
 }
-export default App;

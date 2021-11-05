@@ -4,6 +4,7 @@ import AppMenu from 'components/AppMenu';
 import NavBar from 'components/NavBar';
 import SideBar from 'components/SideBar';
 import ProfileTable from 'components/ProfileTable';
+import Modal from 'components/Modal';
 
 import { LogoutOutlined } from '@ant-design/icons';
 
@@ -55,6 +56,7 @@ const ProfileView = (): JSX.Element => {
               <Button type="primary" block>
                 Add
               </Button>
+              <Modal />
             </Col>
           </Row>
           <ProfileTable />
