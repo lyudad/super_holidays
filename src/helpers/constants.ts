@@ -14,6 +14,15 @@ export const accessUser: AccessUser = {
   login: '/'
 };
 
+interface OnDefaultPass {
+  dashboard: string;
+  users: string;
+}
+export const defaultPass: OnDefaultPass = {
+  dashboard: '/dashboard',
+  users: '/users'
+};
+
 export function getUserAccess(user: User | null): string {
   if (!user) {
     return accessUser.login;

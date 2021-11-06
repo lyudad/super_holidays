@@ -1,9 +1,7 @@
-import React from 'react';
-import { Props } from './types';
-
+import Menu from '../Menu';
 import { StyledSider } from './styles';
 
-export default function ({ menu }: Props): JSX.Element {
+export default function (): JSX.Element {
   return (
     <StyledSider
       breakpoint={'lg'}
@@ -11,7 +9,7 @@ export default function ({ menu }: Props): JSX.Element {
       collapsedWidth={0}
       trigger={null}
     >
-      {menu}
+      <Menu />
     </StyledSider>
   );
 }

@@ -1,11 +1,10 @@
 import { useState } from 'react';
-import { Props } from './types';
-
+import Menu from '../Menu';
 import { MenuOutlined } from '@ant-design/icons';
 import logo from 'images/logo.svg';
 import { StyledDrawer, StyledButton, Nav } from './styles';
 
-const NavBar = ({ menu }: Props) => {
+export default function NavBar(): JSX.Element {
   const [visible, setVisible] = useState(false);
   return (
     <Nav>
@@ -20,11 +19,9 @@ const NavBar = ({ menu }: Props) => {
         onClose={() => setVisible(false)}
         visible={visible}
       >
-        {menu}
+        <Menu />
       </StyledDrawer>
       <img src={logo} className="logo" alt="logo" />
     </Nav>
   );
-};
-
-export default NavBar;
+}
