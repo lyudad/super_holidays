@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { Modal, Button } from 'antd';
+import { Modal } from 'antd';
+import { WrapperButton } from './style';
 import Calendar from '../Calendar';
+import { eng } from 'helpers/eng';
 
 const day: Date = new Date();
 
@@ -22,9 +24,9 @@ export default function ModalCalendar(): JSX.Element {
   };
   return (
     <div>
-      <Button type="primary" onClick={showModal}>
-        Open calendar
-      </Button>
+      <WrapperButton type="primary" onClick={showModal}>
+        {eng.button__add}
+      </WrapperButton>
       <Modal visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
         <Calendar dayToDay={day} />
       </Modal>

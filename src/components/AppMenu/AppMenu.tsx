@@ -1,6 +1,4 @@
-import React from 'react';
 import { Props } from './types';
-
 import { Menu } from 'antd';
 import {
   TeamOutlined,
@@ -8,7 +6,16 @@ import {
   AppstoreOutlined
 } from '@ant-design/icons';
 
-const AppMenu = ({ selectedKey, changeSelectedKey }: Props) => {
+import { accessUser } from '../../helpers/constants';
+import selector from '../../redux/selectors';
+import { useAppSelector } from '../../helpers/utils';
+
+export default function AppMenu({
+  selectedKey,
+  changeSelectedKey
+}: Props): JSX.Element {
+  const user = useAppSelector(selector.getUser);
+
   return (
     <Menu
       selectedKeys={[selectedKey]}
@@ -17,21 +24,36 @@ const AppMenu = ({ selectedKey, changeSelectedKey }: Props) => {
       mode="inline"
       theme="light"
     >
-      <Menu.Item
-        key="1"
-        icon={<AppstoreOutlined />}
-        onClick={changeSelectedKey}
-      >
-        Dashboard
-      </Menu.Item>
-      <Menu.Item key="2" icon={<UserOutlined />} onClick={changeSelectedKey}>
-        Profile
-      </Menu.Item>
-      <Menu.Item key="3" icon={<TeamOutlined />} onClick={changeSelectedKey}>
-        Users
-      </Menu.Item>
+      {user && user.role !== accessUser.employee && (
+        <>
+          <Menu.Item
+            key="dashboard"
+            icon={<AppstoreOutlined />}
+            onClick={changeSelectedKey}
+          >
+            Dashboard
+          </Menu.Item>
+
+          <Menu.Item
+            key="users"
+            icon={<TeamOutlined />}
+            onClick={changeSelectedKey}
+          >
+            Users
+          </Menu.Item>
+        </>
+      )}
+      {user && user.role === accessUser.employee && (
+        <>
+          <Menu.Item
+            key="2"
+            icon={<UserOutlined />}
+            onClick={changeSelectedKey}
+          >
+            Profile
+          </Menu.Item>
+        </>
+      )}
     </Menu>
   );
-};
-
-export default AppMenu;
+}
