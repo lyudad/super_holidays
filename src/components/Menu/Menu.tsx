@@ -7,11 +7,9 @@ import { eng } from 'helpers/eng';
 
 export default function Menu(): JSX.Element {
   const [selectedKey, setSelectedKey] = useState<string>('0');
-  const { state, update } = useContext(TextContext);
+  const { update } = useContext(TextContext);
   const changeSelectedKey = (event: any) => {
     const key = event.key;
-    console.log(state);
-    console.log(key);
     update(key);
     setSelectedKey(key);
   };

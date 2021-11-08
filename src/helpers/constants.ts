@@ -19,8 +19,8 @@ interface OnDefaultPass {
   users: string;
 }
 export const defaultPass: OnDefaultPass = {
-  dashboard: '/dashboard',
-  users: '/users'
+  dashboard: 'dashboard',
+  users: 'users'
 };
 
 export function getUserAccess(user: User | null): string {

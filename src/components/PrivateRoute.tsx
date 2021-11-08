@@ -1,9 +1,10 @@
-import React, { lazy, useState } from 'react';
+import React, { lazy } from 'react';
 import { Route, Redirect } from 'react-router';
 import { useAppSelector } from '../helpers/utils';
 import selector from '../redux/selectors/selectors';
-import { accessUser } from '../helpers/constants';
+import { accessUser, defaultPass } from '../helpers/constants';
 import { createCtx } from './Context/Context';
+import { WrapperFlex } from 'helpers/globalStyle';
 
 const Login = lazy(() => import('../pages/LoginView'));
 const SideBar = lazy(() => import('./SideBar'));
@@ -16,8 +17,9 @@ interface PrivateRouteProps {
   path: string;
 }
 
-const [ctx, TextProvider] = createCtx('dashboard');
+const [ctx, TextProvider] = createCtx(defaultPass.dashboard);
 export const TextContext = ctx;
+
 export default function RoleBasedRouting({
   component: Component,
   roles,
@@ -44,10 +46,10 @@ export default function RoleBasedRouting({
             <>
               <TextProvider>
                 <NavBar />
-                <div style={{ display: 'flex' }}>
+                <WrapperFlex>
                   <SideBar />
                   <Component {...props} />
-                </div>
+                </WrapperFlex>
               </TextProvider>
             </>
           )}
