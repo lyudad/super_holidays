@@ -5,6 +5,7 @@ import {
   UserOutlined,
   AppstoreOutlined
 } from '@ant-design/icons';
+
 import { accessUser } from '../../helpers/constants';
 import selector from '../../redux/selectors';
 import { useAppSelector } from '../../helpers/utils';
@@ -14,6 +15,7 @@ export default function AppMenu({
   changeSelectedKey
 }: Props): JSX.Element {
   const user = useAppSelector(selector.getUser);
+
   return (
     <Menu
       selectedKeys={[selectedKey]}
@@ -25,7 +27,7 @@ export default function AppMenu({
       {user && user.role !== accessUser.employee && (
         <>
           <Menu.Item
-            key="1"
+            key="dashboard"
             icon={<AppstoreOutlined />}
             onClick={changeSelectedKey}
           >
@@ -33,7 +35,7 @@ export default function AppMenu({
           </Menu.Item>
 
           <Menu.Item
-            key="3"
+            key="users"
             icon={<TeamOutlined />}
             onClick={changeSelectedKey}
           >

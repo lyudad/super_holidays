@@ -1,8 +1,9 @@
-import React, { lazy } from 'react';
+import React, { lazy, useState } from 'react';
 import { Route, Redirect } from 'react-router';
 import { useAppSelector } from '../helpers/utils';
 import selector from '../redux/selectors/selectors';
 import { accessUser } from '../helpers/constants';
+import { createCtx } from './Context/Context';
 
 const Login = lazy(() => import('../pages/LoginView'));
 const SideBar = lazy(() => import('./SideBar'));
@@ -15,6 +16,8 @@ interface PrivateRouteProps {
   path: string;
 }
 
+const [ctx, TextProvider] = createCtx('dashboard');
+export const TextContext = ctx;
 export default function RoleBasedRouting({
   component: Component,
   roles,
@@ -39,11 +42,13 @@ export default function RoleBasedRouting({
           {...rest}
           render={props => (
             <>
-              <NavBar />
-              <div style={{ display: 'flex' }}>
-                <SideBar />
-                <Component {...props} />
-              </div>
+              <TextProvider>
+                <NavBar />
+                <div style={{ display: 'flex' }}>
+                  <SideBar />
+                  <Component {...props} />
+                </div>
+              </TextProvider>
             </>
           )}
         />

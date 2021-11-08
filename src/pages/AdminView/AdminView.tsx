@@ -1,16 +1,15 @@
-// import { lazy } from 'react';
-
+import { useContext } from 'react';
+import { TextContext } from 'components/PrivateRoute';
 import Dashboard from 'components/Dashboard';
 import UserView from 'pages/UserView';
 
-// const UserView = lazy(() => import('../../pages/'));
-
 const ProfileView = (): JSX.Element => {
+  const { state } = useContext(TextContext);
   return (
     <>
-      <Dashboard />
+      {state === 'dashboard' && <Dashboard />}
 
-      <UserView />
+      {state === 'users' && <UserView />}
     </>
   );
 };
