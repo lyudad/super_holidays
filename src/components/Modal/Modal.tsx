@@ -25,7 +25,7 @@ export default function ModalCalendar(): JSX.Element {
   return (
     <div>
       <WrapperButton type="primary" onClick={showModal}>
-        {eng.button__add}
+        {eng.button__addHoliday}
       </WrapperButton>
       <Modal visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
         <Calendar dayToDay={day} />
