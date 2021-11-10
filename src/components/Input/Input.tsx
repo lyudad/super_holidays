@@ -1,37 +1,27 @@
-import { Button, Row, Col, Input } from 'antd';
+import { Button, Col, Row, Input } from 'antd';
 import { eng } from 'helpers/eng';
-import { ButtonWrap } from './styles';
+import { ButtonWrap, InputCol, ButtonRow } from './styles';
 
 export default function AddInput(): JSX.Element {
-  const style = { background: '#fff', padding: '0px 0' };
   return (
     <>
       <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
-        <Col className="gutter-row" span={6}>
-          <div style={style}>
-            {' '}
-            <Input placeholder="First Name" />
-          </div>
-        </Col>
-        <Col className="gutter-row" span={6}>
-          <div style={style}>
-            {' '}
-            <Input placeholder="Last Name" />
-          </div>
-        </Col>
-        <Col className="gutter-row" span={6}>
-          <div style={style}>
-            {' '}
-            <Input placeholder="e-mail" />
-          </div>
-        </Col>
-        <Col className="gutter-row" span={6}>
+        <InputCol span={6}>
+          <Input placeholder="First Name" />
+        </InputCol>
+        <InputCol span={6}>
+          <Input placeholder="Last Name" />
+        </InputCol>
+        <InputCol span={6}>
+          <Input placeholder="e-mail" />
+        </InputCol>
+        <InputCol span={6}>
           <ButtonWrap>
             <Button block>{eng.button__save}</Button>
           </ButtonWrap>
-        </Col>
+        </InputCol>
       </Row>
-      <Row justify="end" gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+      <ButtonRow gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
         <Col span={6}>
           <ButtonWrap>
             <Button block>{eng.button__sendPass}</Button>
@@ -45,7 +35,7 @@ export default function AddInput(): JSX.Element {
             <Button block>+</Button>
           </ButtonWrap> */}
         </Col>
-      </Row>
+      </ButtonRow>
     </>
   );
 }
