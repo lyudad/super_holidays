@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react';
-import AppMenu from '../AppMenu';
+import AppMenu from 'components/AppMenu';
 import { TextContext } from 'components/PrivateRoute';
 import { Button } from 'antd';
 import { LogoutOutlined } from '@ant-design/icons';

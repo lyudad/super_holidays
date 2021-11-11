@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { TextContext } from 'components/PrivateRoute';
-import { defaultPass } from '../../helpers/constants';
+import { defaultPass } from 'helpers/constants';
 import Dashboard from 'components/Dashboard';
 import UserView from 'pages/UserView';
 

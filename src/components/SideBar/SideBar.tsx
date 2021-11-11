@@ -1,4 +1,4 @@
-import Menu from '../Menu';
+import Menu from 'components/Menu';
 import { StyledSider } from './styles';
 
 export default function (): JSX.Element {

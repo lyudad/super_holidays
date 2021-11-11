@@ -1,9 +1,9 @@
-import Profile from 'components/Profile';
+import User from 'components/User';
 
 export default function UserView(): JSX.Element {
   return (
     <>
-      <Profile />
+      <User />
     </>
   );
 }

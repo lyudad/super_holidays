@@ -1,8 +1,8 @@
 import React, { lazy } from 'react';
 import { Route, Redirect } from 'react-router';
-import { useAppSelector } from '../helpers/utils';
-import selector from '../redux/selectors/selectors';
-import { accessUser, defaultPass } from '../helpers/constants';
+import { useAppSelector } from 'helpers/utils';
+import selector from 'redux/selectors/selectors';
+import { accessUser, defaultPass } from 'helpers/constants';
 import { createCtx } from './Context/Context';
 import { WrapperFlex } from 'helpers/globalStyle';
 

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Menu from '../Menu';
+import Menu from 'components/Menu';
 import { MenuOutlined } from '@ant-design/icons';
 import logo from 'images/logo.svg';
 import { StyledDrawer, StyledButton, Nav } from './styles';
