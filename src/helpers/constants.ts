@@ -1,4 +1,4 @@
-import { User } from '../redux/reducers/types';
+import { User } from 'redux/reducers/types';
 
 interface AccessUser {
   admin: string;

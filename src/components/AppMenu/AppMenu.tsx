@@ -6,9 +6,9 @@ import {
   AppstoreOutlined
 } from '@ant-design/icons';
 
-import { accessUser } from '../../helpers/constants';
-import selector from '../../redux/selectors';
-import { useAppSelector } from '../../helpers/utils';
+import { accessUser } from 'helpers/constants';
+import selector from 'redux/selectors';
+import { useAppSelector } from 'helpers/utils';
 
 export default function AppMenu({
   selectedKey,

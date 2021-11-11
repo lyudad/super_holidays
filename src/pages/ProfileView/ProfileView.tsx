@@ -1,16 +1,14 @@
-import ProfileTable from '../ProfileTable';
-import Modal from '../Modal';
+import ProfileTable from 'components/ProfileTable';
+import Modal from 'components/Modal';
 
 import { Layout, Row, Col } from 'antd';
 import { StyledContent, StyledLayout } from './styles';
-import AddInput from 'components/Input';
 
 export default function ProfileView(): JSX.Element {
   return (
     <StyledLayout>
       <Layout>
         <StyledContent>
-          <AddInput />
           <Row style={{ marginBottom: '30px' }}>
             <Col xs={16} sm={14} md={10} lg={8} xl={6} xxl={4}>
               <h1 style={{ fontSize: '25px' }}>Davoria Paori</h1>

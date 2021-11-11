@@ -6,7 +6,7 @@ import { accessUser } from './helpers/constants';
 
 import 'antd/dist/antd.css';
 
-const UserPage = lazy(() => import('./pages/UserView'));
+const Profile = lazy(() => import('./pages/ProfileView'));
 const AdminView = lazy(() => import('./pages/AdminView'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
@@ -25,7 +25,7 @@ export default function App(): JSX.Element {
           <RoleBasedRouting
             exact
             path="/employee"
-            component={UserPage}
+            component={Profile}
             roles={[accessUser.employee]}
           />
           <Route>

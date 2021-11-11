@@ -1,8 +1,8 @@
 import React, { lazy } from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { getUserAccess } from '../helpers/constants';
-import { useAppSelector } from '../helpers/utils';
-import selector from '../redux/selectors/selectors';
+import { getUserAccess } from 'helpers/constants';
+import { useAppSelector } from 'helpers/utils';
+import selector from 'redux/selectors/selectors';
 
 const Login = lazy(() => import('../pages/LoginView'));
 
