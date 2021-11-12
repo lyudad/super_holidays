@@ -10,7 +10,7 @@ interface AccessUser {
 export const accessUser: AccessUser = {
   admin: 'admin',
   superAdmin: 'super',
-  employee: 'employee',
+  employee: 'user',
   login: '/'
 };
 

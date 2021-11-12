@@ -1,11 +1,14 @@
-export type TypeUserRole = 'super' | 'admin' | 'employee';
+export type TypeUserRole = 'super' | 'admin' | 'user';
 
 export interface User {
-  _id: string;
+  email: string;
   name: string;
   role: TypeUserRole;
 }
 export interface TypeUserState {
-  readonly isLoggedIn: boolean;
-  readonly user: User | null;
+  isLoggedIn: boolean;
+  user: User | null;
+  token: string | null;
+  isLoading: boolean;
+  error: string | null;
 }
