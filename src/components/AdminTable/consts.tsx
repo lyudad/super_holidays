@@ -34,7 +34,7 @@ export const data = [
   }
 ];
 
-const blockBtn = 'block';
+const blockBtn = 'decline | approve | edit';
 const unblockBtn = 'unblock';
 
 export const columns = [

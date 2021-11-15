@@ -24,7 +24,7 @@ export default function App(): JSX.Element {
           />
           <RoleBasedRouting
             exact
-            path="/employee"
+            path="/user"
             component={Profile}
             roles={[accessUser.employee]}
           />

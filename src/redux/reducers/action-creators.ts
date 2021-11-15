@@ -18,7 +18,7 @@ export const onLogin = (user: LoginUser) => async (dispatch: AppDispatch) => {
     const response = await axios.post<ResponseUser, any>('auth/login', user);
     console.log(response);
 
-    dispatch(loginSuccess(response));
+    dispatch(loginSuccess(response.data));
   } catch (e: any) {
     dispatch(loginError(e.message));
   }
