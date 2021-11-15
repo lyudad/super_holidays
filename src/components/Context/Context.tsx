@@ -1,5 +1,5 @@
 import React from 'react';
-
+// eslint-disable-next-line
 export function createCtx<A>(defaultValue: A) {
   type UpdateType = React.Dispatch<React.SetStateAction<typeof defaultValue>>;
   const defaultUpdate: UpdateType = () => defaultValue;

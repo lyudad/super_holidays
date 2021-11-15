@@ -5,8 +5,8 @@ import { useDispatch } from 'react-redux';
 
 export default function (): JSX.Element {
   const dispatch = useDispatch();
-  const [email, setEmail] = useState<string>('dfvfv');
-  const [pass, sePass] = useState<string>('sdcsfv');
+  const [email, setEmail] = useState<string>('');
+  const [password, sePass] = useState<string>('');
 
   const onChangeName = (e: ChangeEvent<HTMLInputElement>): void => {
     setEmail(e.target.value);
@@ -15,9 +15,8 @@ export default function (): JSX.Element {
     sePass(e.target.value);
   };
 
-  const onFinish = (evant: any): void => {
-    console.log(evant);
-    dispatch(onLogin({ email, password: pass }));
+  const onFinish = (): void => {
+    dispatch(onLogin({ email, password }));
   };
 
   const onFinishFailed = () => {
@@ -51,7 +50,7 @@ export default function (): JSX.Element {
             rules={[{ required: true, message: 'Please input your password!' }]}
           >
             <Input.Password
-              value={pass}
+              value={password}
               onChange={onChangePass}
               placeholder="password"
             />

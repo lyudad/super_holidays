@@ -45,7 +45,7 @@ export const columns = [
     title: 'Action',
     dataIndex: '',
     key: 'x',
-    render: (block: boolean) => {
+    render: (block: boolean): JSX.Element => {
       return <p>{block ? blockBtn : unblockBtn}</p>;
     }
   }

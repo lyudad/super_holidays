@@ -49,10 +49,10 @@ const dataExample = [
   }
 ];
 
-const ProfileTable = () => {
-  const [data, setData] = useState<Data[]>(dataExample);
-  const [page, setPage] = useState<number>(FIRST_PAGE);
-  const [pageSize, setPageSize] = useState<number>(PAGE_SIZE);
+const ProfileTable = (): JSX.Element => {
+  const [data] = useState<Data[]>(dataExample);
+  const [page] = useState<number>(FIRST_PAGE);
+  const [pageSize] = useState<number>(PAGE_SIZE);
 
   const columns = [
     {
