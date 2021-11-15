@@ -1,8 +1,7 @@
-// import { AppDispatch } from '../store';
 import axios from 'axios';
-// import { loginError, loginFetching, loginSuccess } from './slice';
-import { User } from './types';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { User } from './types';
+import { URL } from '../../helpers/constants';
 
 interface LoginUser {
   email: string;
@@ -15,17 +14,7 @@ interface ResponseUser {
 type LoginError = {
   message: string;
 };
-axios.defaults.baseURL = 'http://localhost:8080/';
-// export const onLogin = (user: LoginUser) => async (dispatch: AppDispatch) => {
-//   try {
-//     dispatch(loginFetching());
-//     const response = await axios.post<ResponseUser>('auth/login', user);
-//     dispatch(loginSuccess(response.data));
-//   } catch (e: any) {
-//     dispatch(loginError(e.message));
-//   }
-// };
-// console.log(process.env.URL);
+axios.defaults.baseURL = URL;
 
 export const onLogin = createAsyncThunk<
   ResponseUser,
