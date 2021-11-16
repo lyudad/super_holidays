@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { User } from './types';
-import { URL } from '../../helpers/constants';
+import { URL } from 'helpers/constants';
 
 interface LoginUser {
   email: string;
