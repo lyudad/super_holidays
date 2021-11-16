@@ -7,10 +7,11 @@ interface AccessUser {
   login: string;
 }
 
+export const URL = 'http://localhost:8080/';
 export const accessUser: AccessUser = {
   admin: 'admin',
   superAdmin: 'super',
-  employee: 'employee',
+  employee: 'user',
   login: '/'
 };
 

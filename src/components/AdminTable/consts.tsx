@@ -34,7 +34,7 @@ export const data = [
   }
 ];
 
-const blockBtn = 'block';
+const blockBtn = 'decline | approve | edit';
 const unblockBtn = 'unblock';
 
 export const columns = [
@@ -45,7 +45,7 @@ export const columns = [
     title: 'Action',
     dataIndex: '',
     key: 'x',
-    render: (block: boolean) => {
+    render: (block: boolean): JSX.Element => {
       return <p>{block ? blockBtn : unblockBtn}</p>;
     }
   }
