@@ -7,5 +7,6 @@ export const StyledSider = styled(Layout.Sider)`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    height: 100vh;
   }
 `;

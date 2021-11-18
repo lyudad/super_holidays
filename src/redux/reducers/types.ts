@@ -4,6 +4,8 @@ export interface User {
   email: string;
   name: string;
   role: TypeUserRole;
+  vacation: number;
+  sickDay: number;
 }
 export interface TypeUserState {
   isLoggedIn: boolean;
