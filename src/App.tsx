@@ -9,7 +9,6 @@ import 'antd/dist/antd.css';
 const Profile = lazy(() => import('./pages/ProfileView'));
 const AdminView = lazy(() => import('./pages/AdminView'));
 const NotFound = lazy(() => import('./pages/NotFound'));
-
 export default function App(): JSX.Element {
   return (
     <div className="App">
