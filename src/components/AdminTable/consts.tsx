@@ -1,52 +1,54 @@
+import { Button } from 'antd';
+import ChoseType from './choseType';
+
 export const data = [
   {
     key: 1,
     block: true,
-    name: 'User 1',
+    name: 'Ivan Ivanov',
     dates: '21.12.2021 -  25.12.20201',
-    type: 'vacation',
-    approve: false,
-    status: 'Approve'
+    type: <ChoseType />,
+    approve: false
   },
   {
     key: 2,
     block: true,
-    name: 'User 1',
+    name: 'Petr Petrov',
     dates: '21.12.2021 -  25.12.20201',
-    type: 'vacation',
-    status: 'Approve'
+    type: <ChoseType />,
+    approve: false
   },
   {
     key: 3,
     block: true,
-    name: 'User 1',
+    name: 'Anatoliy Sidorov',
     dates: '21.12.2021 -  25.12.20201',
-    type: 'vacation',
-    status: 'Approve'
+    type: <ChoseType />,
+    approve: true
   },
   {
     key: 4,
     block: true,
-    name: 'User 1',
+    name: 'Bill Heits',
     dates: '21.12.2021 -  25.12.20201',
-    type: 'vacation',
-    status: 'Approve'
+    type: <ChoseType />
   }
 ];
 
-const blockBtn = 'decline | approve | edit';
-const unblockBtn = 'unblock';
+const declineBtn = <Button danger>Decline</Button>;
+const approveBtn = <Button>Approve</Button>;
 
 export const columns = [
   { title: 'User', dataIndex: 'name', key: 'name' },
   { title: 'Dates', dataIndex: 'dates', key: 'data' },
-  { title: 'Type', dataIndex: 'type', key: 'type' },
+  { title: 'Type', dataIndex: 'type', key: 'key' },
   {
     title: 'Action',
-    dataIndex: '',
+    dataIndex: 'approve',
     key: 'x',
-    render: (block: boolean): JSX.Element => {
-      return <p>{block ? blockBtn : unblockBtn}</p>;
+    render: (decline: boolean): JSX.Element => {
+      // функция- запрос на сервер с изменением статуса approve c true ?
+      return <p>{decline ? declineBtn : approveBtn}</p>;
     }
   }
 ];

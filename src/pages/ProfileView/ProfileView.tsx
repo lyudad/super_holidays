@@ -18,10 +18,12 @@ export default function ProfileView(): JSX.Element {
           </Row>
           <Row style={{ marginBottom: '30px' }}>
             <Col xs={16} sm={14} md={10} lg={8} xl={6} xxl={4}>
-              <p style={{ fontSize: '20px' }}>{user?.vacation} sick leave</p>
+              <p style={{ fontSize: '20px' }}>{user?.sick_leaves} sick leave</p>
             </Col>
             <Col xs={16} sm={14} md={10} lg={8} xl={6} xxl={4}>
-              <p style={{ fontSize: '20px' }}>{user?.sickDay} vacations days</p>
+              <p style={{ fontSize: '20px' }}>
+                {user?.vacation} vacations days
+              </p>
             </Col>
           </Row>
           <Row justify="end" style={{ marginBottom: '30px' }}>
