@@ -16,16 +16,16 @@ export default function AddInput(): JSX.Element {
           <Input placeholder="e-mail" />
         </InputCol>
         <InputCol span={6}>
-          <ButtonWrap>
+          {/* <ButtonWrap>
             <Button block>{eng.button__save}</Button>
+          </ButtonWrap> */}
+          <ButtonWrap>
+            <Button block>{eng.button__sendPass}</Button>
           </ButtonWrap>
         </InputCol>
       </Row>
       <ButtonRow gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
         <Col span={6}>
-          <ButtonWrap>
-            <Button block>{eng.button__sendPass}</Button>
-          </ButtonWrap>
           <ButtonWrap>
             <Button type="primary" block>
               {eng.button__addUser}

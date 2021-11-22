@@ -2,7 +2,7 @@ export const data = [
   {
     key: 1,
     block: true,
-    name: 'User 1',
+    name: 'Ivan Ivanov',
     edit: 'edit',
     approve: false,
     status: 'Approve'
@@ -10,21 +10,21 @@ export const data = [
   {
     key: 2,
     block: true,
-    name: 'User 1',
+    name: 'Petr Petrov',
     edit: 'edit',
     status: 'Approve'
   },
   {
     key: 3,
     block: true,
-    name: 'User 1',
+    name: 'Anatoliy Sidorov',
     edit: 'edit',
     status: 'Approve'
   },
   {
     key: 4,
     block: true,
-    name: 'User 1',
+    name: 'Bill Heits',
     edit: 'edit',
     status: 'Approve'
   }
