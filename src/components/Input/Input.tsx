@@ -16,9 +16,6 @@ export default function AddInput(): JSX.Element {
           <Input placeholder="e-mail" />
         </InputCol>
         <InputCol span={6}>
-          {/* <ButtonWrap>
-            <Button block>{eng.button__save}</Button>
-          </ButtonWrap> */}
           <ButtonWrap>
             <Button block>{eng.button__sendPass}</Button>
           </ButtonWrap>
