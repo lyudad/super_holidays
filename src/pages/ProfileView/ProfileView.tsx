@@ -4,9 +4,11 @@ import ProfileTable from 'components/ProfileTable';
 import Modal from 'components/Modal';
 import { Layout, Row, Col } from 'antd';
 import { StyledContent, StyledLayout } from './styles';
+import { getUserData } from 'redux/reducers/action-creators';
 
 export default function ProfileView(): JSX.Element {
   const user = useSelector(selectors.getUser);
+  console.log(getUserData);
   return (
     <StyledLayout>
       <Layout>
