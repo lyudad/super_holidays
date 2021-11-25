@@ -1,5 +1,5 @@
 import React, { lazy } from 'react';
-import { Route, Redirect } from 'react-router';
+import { Route, Redirect, useLocation } from 'react-router';
 import { useAppSelector } from 'helpers/utils';
 import selector from 'redux/selectors/selectors';
 import { accessUser, defaultPass } from 'helpers/constants';
@@ -26,9 +26,11 @@ export default function RoleBasedRouting({
   ...rest
 }: PrivateRouteProps): JSX.Element {
   const user = useAppSelector(selector.getUser);
+  const location = useLocation();
   if (!user) {
     return (
       <Route
+        location={location}
         render={() => (
           <>
             <Login />
@@ -42,6 +44,7 @@ export default function RoleBasedRouting({
       {roles.some(e => e === user.role) ? (
         <Route
           {...rest}
+          location={location}
           render={props => (
             <>
               <TextProvider>

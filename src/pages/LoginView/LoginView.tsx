@@ -2,11 +2,17 @@ import { useState, ChangeEvent } from 'react';
 import { Row, Col, Form, Input, Button } from 'antd';
 import { onLogin } from 'redux/reducers/action-creators';
 import { useDispatch } from 'react-redux';
+import storage from 'redux-persist/lib/storage';
 
 export default function (): JSX.Element {
   const dispatch = useDispatch();
   const [email, setEmail] = useState<string>('');
   const [password, sePass] = useState<string>('');
+
+  storage.getItem('persist:auth').then(e => {
+    const result = e && JSON.parse(JSON.parse(e.toString()).auth);
+    console.log(result);
+  });
 
   const onChangeName = (e: ChangeEvent<HTMLInputElement>): void => {
     setEmail(e.target.value);
