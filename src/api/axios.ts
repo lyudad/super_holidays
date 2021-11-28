@@ -11,7 +11,7 @@ axiosApiInstance.interceptors.request.use(
     const storagePersist: string | null = await storage.getItem('persist:auth');
     if (storagePersist) {
       const data = JSON.parse(JSON.parse(storagePersist).auth);
-      if (data?.accessToken) {
+      if (data?.accessToken && config.url !== 'auth/refresh') {
         config.headers = {
           Authorization: `Bearer ${data.accessToken}`,
           Accept: 'application/json',
@@ -29,30 +29,37 @@ axiosApiInstance.interceptors.request.use(
 // Response interceptor for API calls
 axiosApiInstance.interceptors.response.use(
   response => {
-    console.log(response);
     return response;
   },
   async function (error) {
-    console.log(error);
     const originalRequest = error.config;
-    if (error.response.status === 401 && !originalRequest._retry) {
-      const storagePersist: string | null = await storage.getItem(
-        'persist:auth'
-      );
-      if (storagePersist) {
-        const result = JSON.parse(JSON.parse(storagePersist).auth);
-        if (result?.refreshToken) {
-          console.log(result.refreshToken);
-          axiosApiInstance.defaults.headers.common.Authorization =
-            'Bearer ' + result.refreshToken;
-          originalRequest._retry = true;
-          const { data } = await axiosApiInstance.post('auth/refresh');
-          await storage.setItem('persist:auth', data);
-        }
-      }
+    console.log(error);
+    try {
+      if (error.response.status === 401 && !originalRequest._retry) {
+        const storagePersist: string | null = await storage.getItem(
+          'persist:auth'
+        );
+        if (storagePersist) {
+          const result = JSON.parse(JSON.parse(storagePersist).auth);
+          if (result?.refreshToken) {
+            originalRequest._retry = true;
+            axiosApiInstance.defaults.headers.common.Authorization =
+              'Bearer ' + result.refreshToken;
 
-      return axiosApiInstance(originalRequest);
+            const response = await axiosApiInstance.post('auth/refresh');
+            console.log(response.data);
+            await storage.setItem(
+              'persist:auth',
+              JSON.stringify(response.data.data)
+            );
+          }
+        }
+        return await axiosApiInstance(originalRequest);
+      }
+    } catch (e) {
+      console.log(e);
     }
+
     return Promise.reject(error);
   }
 );
