@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { onLogin } from './action-creators';
+import { onLogin, getUserData } from './action-creators';
 import { User, TypeUserState } from './types';
 
 const initialState: TypeUserState = {
@@ -29,6 +29,17 @@ export const userSlice = createSlice({
     [onLogin.rejected.type]: (state, action: PayloadAction<string>) => {
       state.isLoading = false;
       state.error = action.payload;
+    }
+  }
+});
+
+export const dataSlice = createSlice({
+  name: 'data',
+  initialState,
+  reducers: {},
+  extraReducers: {
+    [getUserData.fulfilled.type]: (state: any, action: any) => {
+      state.userData = action.payload.userData;
     }
   }
 });

@@ -1,14 +1,18 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import selectors from 'redux/selectors';
 import ProfileTable from 'components/ProfileTable';
 import Modal from 'components/Modal';
 import { Layout, Row, Col } from 'antd';
 import { StyledContent, StyledLayout } from './styles';
-import { getUserData } from 'redux/reducers/action-creators';
+//import { getUserData } from 'redux/reducers/action-creators';
 
 export default function ProfileView(): JSX.Element {
   const user = useSelector(selectors.getUser);
-  console.log(getUserData);
+  //const state = selectors.getState.getUserData;
+  console.log(user);
+  const dispatch = useDispatch();
+  //console.log(user);
+  // const [UserData, setUserData] = useState({});
   return (
     <StyledLayout>
       <Layout>

@@ -6,6 +6,7 @@ import UserView from 'pages/UserView';
 
 const ProfileView = (): JSX.Element => {
   const { state } = useContext(TextContext);
+  console.log(state);
   return (
     <>
       {state === defaultPass.dashboard && <Dashboard />}

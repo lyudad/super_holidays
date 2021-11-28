@@ -2,8 +2,6 @@ import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { User } from './types';
 import { URL } from 'helpers/constants';
-import { useSelector } from 'react-redux';
-import selectors from 'redux/selectors';
 
 interface LoginUser {
   email: string;
@@ -12,15 +10,6 @@ interface LoginUser {
 interface ResponseUser {
   token: string;
   user: User;
-}
-interface UserBookingData {
-  id: number;
-  month: string;
-  start_day: number;
-  end_day: number;
-  type: string;
-  status: string;
-  userId: number;
 }
 type LoginError = {
   message: string;
@@ -34,7 +23,6 @@ export const onLogin = createAsyncThunk<
 >('login/action', async (user: LoginUser, thunkAPI) => {
   try {
     const response = await axios.post<ResponseUser>('auth/login', user);
-    console.log(response.data);
     return response.data;
   } catch (e) {
     console.log('hello');
@@ -42,25 +30,19 @@ export const onLogin = createAsyncThunk<
   }
 });
 
-// const userState = useSelector(selectors.getState);
-// let userAuthToken = userState.token;
-const userBookingUrl = 'http://localhost:8080/booking';
+const token =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Iml2YW5vdkBnbWFpbC5jb20iLCJpZCI6MSwicm9sZXMiOiJ1c2VyIiwiaWF0IjoxNjM4MTMxMDU5LCJleHAiOjE2MzgyMTc0NTl9.g3lQ5L8mP7ajOpdzk_mJTVkEo5qrh-kWrKOuxZ9sldg';
+const getUserUrl = 'http://localhost:8080/users';
+axios.defaults.headers.common = { Authorization: `Bearer ${token}` };
 
-export const getUserData = axios.get(userBookingUrl).then(function (response) {
-  console.log(response.data);
+export const getUserData = createAsyncThunk('data/getUserData', async () => {
+  try {
+    const userData = await axios
+      .get(getUserUrl)
+      .then(responce => responce.data);
+    console.log(userData);
+    return userData;
+  } catch (error) {
+    console.log('no user data');
+  }
 });
-
-// export const getUserData = createAsyncThunk<
-//   ResponseUser,
-//   LoginUser,
-//   { rejectValue: LoginError }
-// >('login/booking', async (user: UserBookingData, thunkAPI) => {
-//   try {
-//     const response = await axios.get(userBookingUrl);
-//     console.log(response.data);
-//     return response.data;
-//   } catch (e) {
-//     console.log('hello');
-//     return thunkAPI.rejectWithValue({ message: 'error' });
-//   }
-// });
