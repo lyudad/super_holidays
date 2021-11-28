@@ -1,7 +1,6 @@
-import axios from 'axios';
+import { axiosApiInstance } from '../../api/axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { User, Auth } from './types';
-import { URL } from 'helpers/constants';
 
 interface LoginUser {
   email: string;
@@ -14,7 +13,6 @@ interface ResponseUser {
 type Error = {
   message: string;
 };
-axios.defaults.baseURL = URL;
 
 export const onLogin = createAsyncThunk<
   ResponseUser,
@@ -22,13 +20,40 @@ export const onLogin = createAsyncThunk<
   { rejectValue: Error }
 >('login/action', async (user: LoginUser, thunkAPI) => {
   try {
-    const response = await axios.post<ResponseUser>('auth/login', user);
+    const response = await axiosApiInstance.post<ResponseUser>(
+      'auth/login',
+      user
+    );
     return response.data;
   } catch (e) {
-    console.log('hello');
+    console.log(e);
     return thunkAPI.rejectWithValue({ message: 'error' });
   }
 });
+export const onLogout = createAsyncThunk<{ rejectValue: Error }>(
+  'logout/action',
+  async (_, thunkAPI) => {
+    try {
+      const response = await axiosApiInstance.post('auth/logout');
+      return response.data;
+    } catch (e) {
+      console.log(e);
+      return thunkAPI.rejectWithValue({ message: 'error' });
+    }
+  }
+);
+export const onRefresh = createAsyncThunk<{ rejectValue: Error }>(
+  'refresh/action',
+  async (_, thunkAPI) => {
+    try {
+      const response = await axiosApiInstance.post('auth/refresh');
+      return response.data;
+    } catch (e) {
+      console.log(e);
+      return thunkAPI.rejectWithValue({ message: 'error' });
+    }
+  }
+);
 
 interface CurrentUser {
   id: string;
@@ -36,20 +61,18 @@ interface CurrentUser {
   email: string;
   role: string;
 }
-type TOkenValue = string;
+type TokenValue = string;
 
 export const onCurrentUser = createAsyncThunk<
   CurrentUser,
-  TOkenValue,
+  TokenValue,
   { rejectValue: Error }
->('getCurrentUser/action', async (token: TOkenValue, thunkAPI) => {
+>('getCurrentUser/action', async (token: TokenValue, thunkAPI) => {
   try {
-    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-    const { data } = await axios.get<CurrentUser>('users/current');
-    console.log(data);
+    const { data } = await axiosApiInstance.get<CurrentUser>('users/current');
     return data;
   } catch (e) {
-    console.log('hello');
+    console.log(e);
     return thunkAPI.rejectWithValue({ message: 'error' });
   }
 });

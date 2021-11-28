@@ -36,7 +36,7 @@ export default function (): JSX.Element {
     if (state.auth?.accessToken) {
       dispatch(onCurrentUser(state.auth?.accessToken));
     }
-  }, [dispatch, state]);
+  }, [dispatch, state.auth]);
 
   return (
     <Row align="middle" justify="center" style={{ minHeight: '100vh' }}>

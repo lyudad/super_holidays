@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { onLogin, onCurrentUser } from './action-creators';
+import { onLogin, onCurrentUser, onLogout, onRefresh } from './action-creators';
 import { User, TypeUserState, Auth } from './types';
 
 const initialState: TypeUserState = {
@@ -29,6 +29,37 @@ export const userSlice = createSlice({
     },
     [onLogin.rejected.type]: (state, action: PayloadAction<string>) => {
       state.error = action.payload;
+      state.isLoading = false;
+    },
+    [onLogout.pending.type]: state => {
+      state.isLoading = true;
+    },
+    [onLogout.fulfilled.type]: state => {
+      state.user = null;
+      state.auth = null;
+      state.isLoggedIn = false;
+      state.isLoading = false;
+    },
+    [onLogout.rejected.type]: (state, action: PayloadAction<string>) => {
+      state.error = action.payload;
+      state.isLoading = false;
+    },
+    [onRefresh.pending.type]: state => {
+      state.isLoading = true;
+    },
+    [onRefresh.fulfilled.type]: (
+      state,
+      action: PayloadAction<{ data: Auth }>
+    ) => {
+      state.auth = action.payload.data;
+      state.isLoggedIn = true;
+      state.isLoading = false;
+    },
+    [onRefresh.rejected.type]: (state, action: PayloadAction<string>) => {
+      state.error = action.payload;
+      state.user = null;
+      state.auth = null;
+      state.isLoggedIn = false;
       state.isLoading = false;
     },
     [onCurrentUser.pending.type]: state => {
