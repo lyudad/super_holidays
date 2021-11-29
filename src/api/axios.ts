@@ -40,9 +40,9 @@ axiosApiInstance.interceptors.response.use(
         !originalRequest._retry &&
         'http://localhost:8080/auth/refresh'
       ) {
-        window.location.href = '?Unauthorized=true';
+        // window.location.href = '?Unauthorized=true';
       }
-      if (error.response.status === 401 && !originalRequest._retry) {
+      if (error.response.status === 401 && originalRequest._retry) {
         const storagePersist: string | null = await storage.getItem(
           'persist:auth'
         );
@@ -52,15 +52,23 @@ axiosApiInstance.interceptors.response.use(
             originalRequest._retry = true;
             axiosApiInstance.defaults.headers.common.Authorization =
               'Bearer ' + result.refreshToken;
-
-            const response = await axiosApiInstance.post('auth/refresh');
-            window.location.href =
-              '?accessToken=' +
-              response.data.data.accessToken +
-              '&refreshToken=' +
-              response.data.data.refreshToken +
-              '&sid=' +
-              response.data.data.sid;
+            try {
+              const response = await axiosApiInstance.post('auth/refresh');
+              return () => {
+                if (response.status === 200) {
+                  window.location.href =
+                    '?accessToken=' +
+                    response.data.data.accessToken +
+                    '&refreshToken=' +
+                    response.data.data.refreshToken +
+                    '&sid=' +
+                    response.data.data.sid;
+                  return axiosApiInstance(originalRequest);
+                }
+              };
+            } catch (e) {
+              console.log(e);
+            }
           }
         }
         return await axiosApiInstance(originalRequest);

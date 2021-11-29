@@ -34,8 +34,7 @@ export const onLogin = (user: LoginUser) => async (dispatch: AppDispatch) => {
       'auth/login',
       user
     );
-    dispatch(userSlice.actions.onLoginSuccess);
-    return response.data;
+    dispatch(userSlice.actions.onLoginSuccess(response.data));
   } catch (e) {
     dispatch(userSlice.actions.onLoginError('login error'));
     console.log(e);
@@ -81,13 +80,6 @@ export const onLogout = () => async (dispatch: AppDispatch) => {
 //   }
 // );
 
-interface CurrentUser {
-  id: string;
-  name: string;
-  email: string;
-  role: string;
-}
-
 // export const onCurrentUser = createAsyncThunk<
 //   CurrentUser,
 //   TokenValue,
@@ -101,13 +93,12 @@ interface CurrentUser {
 //     return thunkAPI.rejectWithValue({ message: 'error' });
 //   }
 // });
-
+// eslint-disable-next-line
 export const onCurrentUser = () => async (dispatch: AppDispatch) => {
   dispatch(userSlice.actions.onCurrentUserRequest);
   try {
-    const { data } = await axiosApiInstance.get<CurrentUser>('users/current');
-    dispatch(userSlice.actions.onCurrentUserSuccess);
-    return data;
+    const response = await axiosApiInstance.get<User>('users/current');
+    dispatch(userSlice.actions.onCurrentUserSuccess(response.data));
   } catch (e) {
     dispatch(userSlice.actions.onCurrentUserError('current user error'));
     console.log(e);

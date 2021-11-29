@@ -23,10 +23,10 @@ export default function App(): JSX.Element {
     sid: params.get('sid')
   };
   useEffect(() => {
-    if (unauthorized) {
-      dispatch(onLogout);
-      window.location.reload();
-    }
+    // if (unauthorized) {
+    //   dispatch(() => onLogout());
+    //   // window.location.reload();
+    // }
     if (refresh.accessToken && refresh.refreshToken && refresh.sid) {
       dispatch(
         onRefresh({
@@ -35,7 +35,7 @@ export default function App(): JSX.Element {
           sid: refresh.sid
         })
       );
-      window.location.reload();
+      // window.location.reload();
     }
   }, [
     dispatch,
