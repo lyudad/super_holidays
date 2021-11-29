@@ -11,7 +11,7 @@ axiosApiInstance.interceptors.request.use(
     const storagePersist: string | null = await storage.getItem('persist:auth');
     if (storagePersist) {
       const data = JSON.parse(JSON.parse(storagePersist).auth);
-      if (data?.accessToken && config.url !== 'auth/login') {
+      if (data?.accessToken && config.url) {
         config.headers = {
           Authorization: `Bearer ${data.accessToken}`,
           Accept: 'application/json',

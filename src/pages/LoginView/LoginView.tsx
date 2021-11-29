@@ -57,7 +57,7 @@ export default function (): JSX.Element {
           </Form.Item>
 
           <Form.Item>
-            <Button onClick={onFinish} type="primary" htmlType="submit">
+            <Button type="primary" htmlType="submit">
               Submit
             </Button>
           </Form.Item>

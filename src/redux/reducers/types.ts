@@ -8,6 +8,8 @@ export interface User {
   sick_leaves: number;
 }
 
+export type Token = string;
+
 export interface Auth {
   accessToken: string;
   refreshToken: string;
