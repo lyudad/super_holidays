@@ -18,10 +18,10 @@ export default function App(): JSX.Element {
   const state = useSelector(selectors.getState);
   const dispatch = useDispatch();
   useEffect(() => {
-    if (state.auth && state.auth.accessToken) {
-      dispatch(onCurrentUser(state.auth.accessToken));
+    if (!state.user && state.auth?.accessToken) {
+      dispatch(onCurrentUser(state.auth?.accessToken));
     }
-  }, [dispatch, state.auth]);
+  }, [dispatch, state.auth, state.user]);
   return (
     <>
       {state.isLoading ? (
