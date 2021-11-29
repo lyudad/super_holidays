@@ -35,6 +35,13 @@ axiosApiInstance.interceptors.response.use(
     const originalRequest = error.config;
     console.log(error);
     try {
+      if (
+        error.response.status === 401 &&
+        !originalRequest._retry &&
+        'http://localhost:8080/auth/refresh'
+      ) {
+        window.location.href = '?Unauthorized=true';
+      }
       if (error.response.status === 401 && !originalRequest._retry) {
         const storagePersist: string | null = await storage.getItem(
           'persist:auth'
@@ -47,11 +54,13 @@ axiosApiInstance.interceptors.response.use(
               'Bearer ' + result.refreshToken;
 
             const response = await axiosApiInstance.post('auth/refresh');
-            console.log(response.data);
-            await storage.setItem(
-              'persist:auth',
-              JSON.stringify(response.data.data)
-            );
+            window.location.href =
+              '?accessToken=' +
+              response.data.data.accessToken +
+              '&refreshToken=' +
+              response.data.data.refreshToken +
+              '&sid=' +
+              response.data.data.sid;
           }
         }
         return await axiosApiInstance(originalRequest);

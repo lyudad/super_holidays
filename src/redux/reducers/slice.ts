@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { onLogin, onCurrentUser, onLogout, onRefresh } from './action-creators';
 import { User, TypeUserState, Auth } from './types';
 
 const initialState: TypeUserState = {
@@ -13,64 +12,55 @@ const initialState: TypeUserState = {
 export const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {},
-  extraReducers: {
-    [onLogin.pending.type]: state => {
+  reducers: {
+    userRefreshing(state) {
       state.isLoading = true;
     },
-    [onLogin.fulfilled.type]: (
-      state,
-      action: PayloadAction<{ user: User; data: Auth }>
-    ) => {
+    userRefreshSuccess(state, action: PayloadAction<Auth>) {
+      state.isLoading = false;
+      state.auth = action.payload;
+    },
+    userRefreshError(state, action: PayloadAction<string>) {
+      state.isLoading = false;
+      state.user = null;
+      state.auth = null;
+      state.error = action.payload;
+    },
+    onLoginRequest(state) {
+      state.isLoading = true;
+    },
+    onLoginSuccess(state, action: PayloadAction<{ user: User; data: Auth }>) {
       state.user = action.payload.user;
       state.auth = action.payload.data;
       state.isLoggedIn = true;
       state.isLoading = false;
     },
-    [onLogin.rejected.type]: (state, action: PayloadAction<string>) => {
+    onLoginError(state, action: PayloadAction<string>) {
       state.error = action.payload;
       state.isLoading = false;
     },
-    [onLogout.pending.type]: state => {
+    onLogoutRequest(state) {
       state.isLoading = true;
     },
-    [onLogout.fulfilled.type]: state => {
+    onLogoutSuccess(state) {
       state.user = null;
       state.auth = null;
       state.isLoggedIn = false;
       state.isLoading = false;
     },
-    [onLogout.rejected.type]: (state, action: PayloadAction<string>) => {
+    onLogoutError(state, action: PayloadAction<string>) {
       state.error = action.payload;
       state.isLoading = false;
     },
-    [onRefresh.pending.type]: state => {
+    onCurrentUserRequest(state) {
       state.isLoading = true;
     },
-    [onRefresh.fulfilled.type]: (
-      state,
-      action: PayloadAction<{ data: Auth }>
-    ) => {
-      state.auth = action.payload.data;
-      state.isLoggedIn = true;
-      state.isLoading = false;
-    },
-    [onRefresh.rejected.type]: (state, action: PayloadAction<string>) => {
-      state.error = action.payload;
-      state.user = null;
-      state.auth = null;
-      state.isLoggedIn = false;
-      state.isLoading = false;
-    },
-    [onCurrentUser.pending.type]: state => {
-      state.isLoading = true;
-    },
-    [onCurrentUser.fulfilled.type]: (state, action: PayloadAction<User>) => {
+    onCurrentUserSuccess(state, action: PayloadAction<User>) {
       state.user = action.payload;
       state.isLoggedIn = true;
       state.isLoading = false;
     },
-    [onCurrentUser.rejected.type]: (state, action: PayloadAction<string>) => {
+    onCurrentUserError(state, action: PayloadAction<string>) {
       state.error = action.payload;
       state.isLoading = false;
     }

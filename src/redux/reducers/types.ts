@@ -11,7 +11,7 @@ export interface User {
 export interface Auth {
   accessToken: string;
   refreshToken: string;
-  sid: number;
+  sid: string;
 }
 export interface TypeUserState {
   isLoggedIn: boolean;

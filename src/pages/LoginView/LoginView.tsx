@@ -34,7 +34,7 @@ export default function (): JSX.Element {
   };
   useEffect(() => {
     if (state.auth?.accessToken) {
-      dispatch(onCurrentUser(state.auth?.accessToken));
+      dispatch(onCurrentUser());
     }
   }, [dispatch, state.auth]);
 
