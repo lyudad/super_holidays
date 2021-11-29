@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import Calendar from 'react-calendar';
 import { Select } from 'antd';
+
 import { InputWrapper } from './styles';
 import 'react-calendar/dist/Calendar.css';
 import './calendar.css';
+
 interface DataPickerPropsProps {
   dayToDay: Date;
 }
