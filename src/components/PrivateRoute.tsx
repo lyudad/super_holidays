@@ -1,10 +1,12 @@
-import React, { lazy } from 'react';
+import React, { lazy, useEffect } from 'react';
 import { Route, Redirect, useLocation } from 'react-router';
+import { useDispatch } from 'react-redux';
 import { useAppSelector } from 'helpers/utils';
 import selector from 'redux/selectors/selectors';
 import { accessUser, defaultPass } from 'helpers/constants';
 import { createCtx } from './Context/Context';
 import { WrapperFlex } from 'helpers/globalStyle';
+import { onCurrentUser } from 'redux/reducers/action-creators';
 
 const Login = lazy(() => import('../pages/LoginView'));
 const SideBar = lazy(() => import('./SideBar'));
@@ -26,7 +28,15 @@ export default function RoleBasedRouting({
   ...rest
 }: PrivateRouteProps): JSX.Element {
   const user = useAppSelector(selector.getUser);
+  const state = useAppSelector(selector.getState);
   const location = useLocation();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (state.auth?.accessToken) {
+      dispatch(onCurrentUser());
+    }
+  }, [dispatch, state.auth]);
   if (!user) {
     return (
       <Route

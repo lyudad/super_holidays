@@ -1,22 +1,12 @@
-import { useState, ChangeEvent, useEffect } from 'react';
+import { useState, ChangeEvent } from 'react';
 import { Row, Col, Form, Input, Button } from 'antd';
 import { onLogin } from 'redux/reducers/action-creators';
 import { useDispatch } from 'react-redux';
-import { useAppSelector } from 'helpers/utils';
-import selectors from '../../redux/selectors';
-import { onCurrentUser } from 'redux/reducers/action-creators';
-
-// interface AuthObject {
-//   accessToken: string;
-//   refreshToken: string;
-//   sid: string;
-// }
 
 export default function (): JSX.Element {
   const dispatch = useDispatch();
   const [email, setEmail] = useState<string>('');
   const [password, sePass] = useState<string>('');
-  const state = useAppSelector(selectors.getState);
 
   const onChangeName = (e: ChangeEvent<HTMLInputElement>): void => {
     setEmail(e.target.value);
@@ -32,11 +22,6 @@ export default function (): JSX.Element {
   const onFinishFailed = () => {
     console.log('Failed:');
   };
-  useEffect(() => {
-    if (state.auth?.accessToken) {
-      dispatch(onCurrentUser());
-    }
-  }, [dispatch, state.auth]);
 
   return (
     <Row align="middle" justify="center" style={{ minHeight: '100vh' }}>
