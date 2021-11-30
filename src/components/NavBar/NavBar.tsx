@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import Menu from 'components/Menu';
 import { MenuOutlined } from '@ant-design/icons';
 import logo from 'images/logo.svg';
+
 import { StyledDrawer, StyledButton, Nav } from './styles';
 
 export default function NavBar(): JSX.Element {
@@ -18,9 +18,7 @@ export default function NavBar(): JSX.Element {
         placement="left"
         onClose={() => setVisible(false)}
         visible={visible}
-      >
-        <Menu />
-      </StyledDrawer>
+      ></StyledDrawer>
       <img src={logo} className="logo" alt="logo" />
     </Nav>
   );

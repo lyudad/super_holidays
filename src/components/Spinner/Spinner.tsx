@@ -1,12 +1,11 @@
-import PacmanLoader from 'react-spinners/PacmanLoader';
-import { css } from '@emotion/react';
-
-const override = css`
-  display: block;
-  margin: 100px auto;
-  border-color: red;
-`;
+import Loader from 'react-loader-spinner';
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
+import { StyledDiv } from './styles';
 
 export default function Spinner(): JSX.Element {
-  return <PacmanLoader color={'rgb(122, 122, 240)'} css={override} />;
+  return (
+    <StyledDiv className={'spinner'}>
+      <Loader type="Circles" color="#1890ff" height={50} width={50} />
+    </StyledDiv>
+  );
 }
