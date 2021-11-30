@@ -7,10 +7,18 @@ export interface User {
   vacation: number;
   sick_leaves: number;
 }
+
+export type Token = string;
+
+export interface Auth {
+  accessToken: string;
+  refreshToken: string;
+  sid: string;
+}
 export interface TypeUserState {
   isLoggedIn: boolean;
   user: User | null;
-  token: string | null;
+  auth: Auth | null;
   isLoading: boolean;
   error: string | null;
 }
