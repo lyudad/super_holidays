@@ -6,6 +6,7 @@ export interface User {
   role: TypeUserRole;
   vacation: number;
   sick_leaves: number;
+  id: number;
 }
 
 export type Token = string;

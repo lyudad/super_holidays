@@ -1,8 +1,10 @@
 import { useSelector } from 'react-redux';
 import selectors from 'redux/selectors';
 import ProfileTable from 'components/ProfileTable';
-import Modal from 'components/Modal';
+import Calendar from 'components/Calendar';
 import { Row } from 'antd';
+
+const date: Date = new Date();
 
 import { StyledContent, StyledLayout } from './styles';
 
@@ -21,7 +23,7 @@ export default function ProfileView(): JSX.Element {
           <p style={{ fontSize: '20px' }}>{user?.vacation} vacation days</p>
         </Row>
         <Row justify="end" style={{ marginBottom: '30px' }}>
-          <Modal />
+          <Calendar dayToDay={date} />
         </Row>
         <ProfileTable />
       </StyledContent>

@@ -56,3 +56,38 @@ export const onCurrentUser = createAsyncThunk<
     return thunkAPI.rejectWithValue({ message: 'error' });
   }
 });
+
+interface OnSubmit {
+  start_day: string;
+  end_day: string;
+  type: string;
+  status: string;
+  id: number;
+}
+interface ResponseBooking {
+  id: number;
+  start_day: string;
+  end_day: string;
+  type: string;
+  status: string;
+  userId: number;
+  updatedAt: string;
+  createdAt: string;
+}
+
+export const onCreateBookingFromUser = createAsyncThunk<
+  ResponseBooking,
+  OnSubmit,
+  { rejectValue: Error }
+>('createBooking/action', async (user: OnSubmit, thunkAPI) => {
+  try {
+    const response = await axiosApiInstance.post<ResponseBooking>(
+      'booking',
+      user
+    );
+    return response.data;
+  } catch (e) {
+    console.log(e);
+    return thunkAPI.rejectWithValue({ message: 'error' });
+  }
+});
