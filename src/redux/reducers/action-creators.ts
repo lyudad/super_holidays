@@ -1,4 +1,4 @@
-import { axiosApiInstance } from '../../api/axios';
+import { axiosApiInstance } from 'api/axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { User, Auth, Token } from './types';
 
