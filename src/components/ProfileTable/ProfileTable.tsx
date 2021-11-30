@@ -49,7 +49,7 @@ const dataExample = [
   }
 ];
 
-const ProfileTable = (): JSX.Element => {
+export default function ProfileTable(): JSX.Element {
   const [data] = useState<Data[]>(dataExample);
   const [page] = useState<number>(FIRST_PAGE);
   const [pageSize] = useState<number>(PAGE_SIZE);
@@ -77,13 +77,6 @@ const ProfileTable = (): JSX.Element => {
       key: '4',
       title: 'type',
       dataIndex: 'type'
-      //   filters: [
-      //     { text: 'vacation', value: false },
-      //     { text: 'sick leave', value: true }
-      //   ],
-      //   onFilter: (value: any, record: any) => {
-      //     return record.approved === value;
-      //   }
     }
   ];
   return (
@@ -94,15 +87,8 @@ const ProfileTable = (): JSX.Element => {
         pagination={{
           current: page,
           pageSize: pageSize
-          //   total: 5,
-          //   onChange: (p, pSize) => {
-          //     setPage(p);
-          //     setPageSize(pSize);
-          //   }
         }}
       ></Table>
     </div>
   );
-};
-
-export default ProfileTable;
+}

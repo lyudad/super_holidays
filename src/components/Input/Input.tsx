@@ -1,5 +1,6 @@
 import { Button, Col, Row, Input } from 'antd';
 import { eng } from 'helpers/eng';
+
 import { ButtonWrap, InputCol, ButtonRow } from './styles';
 
 export default function AddInput(): JSX.Element {

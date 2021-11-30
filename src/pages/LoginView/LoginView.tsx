@@ -1,7 +1,7 @@
 import { useState, ChangeEvent } from 'react';
-import { Row, Col, Form, Input, Button } from 'antd';
-import { onLogin } from 'redux/reducers/action-creators';
 import { useDispatch } from 'react-redux';
+import { onLogin } from 'redux/reducers/action-creators';
+import { Row, Col, Form, Input, Button } from 'antd';
 
 export default function (): JSX.Element {
   const dispatch = useDispatch();

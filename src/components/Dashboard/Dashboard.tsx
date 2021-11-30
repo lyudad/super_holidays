@@ -1,5 +1,6 @@
-import { Layout, Row, Col } from 'antd';
 import AdminTable from 'components/AdminTable';
+import { Layout, Row, Col } from 'antd';
+
 import { StyledContent, StyledLayout } from './styles';
 
 export default function Dashboard(): JSX.Element {

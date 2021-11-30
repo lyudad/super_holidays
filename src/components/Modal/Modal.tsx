@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Modal } from 'antd';
-import { WrapperButton } from './style';
 import Calendar from 'components/Calendar';
 import { eng } from 'helpers/eng';
+
+import { WrapperButton } from './styles';
 
 const day: Date = new Date();
 
