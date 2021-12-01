@@ -4,8 +4,10 @@ export interface User {
   email: string;
   name: string;
   role: TypeUserRole;
+  isBlocked: boolean;
   vacation: number;
   sick_leaves: number;
+  dates: [TypeUserDates];
 }
 
 export type Token = string;
@@ -21,4 +23,12 @@ export interface TypeUserState {
   auth: Auth | null;
   isLoading: boolean;
   error: string | null;
+}
+
+export interface TypeUserDates {
+  start_day: string;
+  end_day: string;
+  type: string;
+  status: string;
+  userId: number;
 }

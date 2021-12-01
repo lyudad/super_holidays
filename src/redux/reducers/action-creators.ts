@@ -24,12 +24,14 @@ export const onLogin = createAsyncThunk<
       'auth/login',
       user
     );
+    console.log(response);
     return response.data;
   } catch (e) {
     console.log(e);
     return thunkAPI.rejectWithValue({ message: 'error' });
   }
 });
+
 export const onLogout = createAsyncThunk<{ rejectValue: Error }>(
   'logout/action',
   async (_, thunkAPI) => {

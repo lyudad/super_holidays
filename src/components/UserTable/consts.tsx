@@ -1,47 +1,28 @@
-export const data = [
+import { Data } from './types';
+
+export const data: Data[] = [
   {
     key: 1,
-    block: true,
     name: 'Ivan Ivanov',
-    edit: 'edit',
-    approve: false,
-    status: 'Approve'
+    email: 'ivanov@mail.ru',
+    status: true
   },
   {
     key: 2,
-    block: true,
-    name: 'Petr Petrov',
-    edit: 'edit',
-    status: 'Approve'
+    name: 'Anatoli Ivanov',
+    email: 'Anatoli@mail.ru',
+    status: true
   },
   {
     key: 3,
-    block: true,
-    name: 'Anatoliy Sidorov',
-    edit: 'edit',
-    status: 'Approve'
+    name: 'Alex Ivanov',
+    email: 'Alex@mail.ru',
+    status: true
   },
   {
     key: 4,
-    block: true,
-    name: 'Bill Heits',
-    edit: 'edit',
-    status: 'Approve'
-  }
-];
-
-const blockBtn = 'block';
-const unblockBtn = 'unblock';
-
-export const columns = [
-  { title: 'User', dataIndex: 'name', key: 'name' },
-  { title: 'Edit', dataIndex: 'edit', key: 'edit' },
-  {
-    title: 'Action',
-    dataIndex: '',
-    key: 'x',
-    render: (block: boolean): JSX.Element => {
-      return <p>{block ? blockBtn : unblockBtn}</p>;
-    }
+    name: 'Steven Ivanov',
+    email: 'Steven@mail.ru',
+    status: true
   }
 ];

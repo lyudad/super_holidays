@@ -4,9 +4,9 @@ import { Layout } from 'antd';
 const { Content } = Layout;
 
 export const StyledLayout = styled(Layout)`
-  min-height: calc(100vh - 80px);
+  min-height: calc(100vh - 5rem);
 `;
 
 export const StyledContent = styled(Content)`
-  padding: 45px;
+  padding: 3rem;
 `;

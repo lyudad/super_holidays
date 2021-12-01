@@ -1,3 +1,4 @@
+import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
@@ -12,11 +13,11 @@ const persistor = persistStore(store);
 
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter>
-      <PersistGate loading={null} persistor={persistor}>
+    <PersistGate persistor={persistor}>
+      <BrowserRouter>
         <App />
-      </PersistGate>
-    </BrowserRouter>
+      </BrowserRouter>
+    </PersistGate>
   </Provider>,
   document.getElementById('root')
 );
