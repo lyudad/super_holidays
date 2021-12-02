@@ -9,33 +9,11 @@ import { Table } from 'antd';
 export default function ProfileTable(): JSX.Element {
   const { dates } = useSelector(selectors.getState);
 
-  const months = [
-    { '01': 'January' },
-    { '02': 'February' },
-    { '03': 'March' },
-    { '04': 'April' },
-    { '05': 'May' },
-    { '06': 'June' },
-    { '07': 'July' },
-    { '08': 'August' },
-    { '09': 'September' },
-    { '10': 'October' },
-    { '11': 'November' },
-    { '12': 'December' }
-  ];
-
   const dataExample = dates?.map(e => {
-    const startDay = e.start_day.split('')[8] + e.start_day.split('')[9];
-    const endDay = e.end_day.split('')[8] + e.end_day.split('')[9];
-    const month = months.filter(
-      object =>
-        Object.keys(object).join() ===
-        e.start_day.split('')[5] + e.start_day.split('')[6]
-    );
     return {
       key: nanoid(),
-      month: Object.values(month[0]).join(),
-      dates: `${startDay}-${endDay}`,
+      month: `${e.start_day.split(' ')[1]} - ${e.start_day.split(' ')[3]}`,
+      dates: `${e.start_day.split(' ')[2]}-${e.end_day.split(' ')[2]}`,
       status: e.status,
       type: e.type
     };

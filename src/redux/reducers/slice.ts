@@ -45,7 +45,7 @@ export const userSlice = createSlice({
       state,
       action: PayloadAction<[TypeUserDates]>
     ) => {
-      state.dates = action.payload;
+      state.dates = action.payload.reverse();
       state.isLoading = false;
     },
     [onCurrentBooking.rejected.type]: (

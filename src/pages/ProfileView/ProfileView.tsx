@@ -13,7 +13,6 @@ import { StyledContent, StyledLayout } from './styles';
 export default function ProfileView(): JSX.Element {
   const dispatch = useDispatch();
   const user = useSelector(selectors.getUser);
-  // const dates = useSelector(selectors.getDates);
   useEffect(() => {
     dispatch(onCurrentBooking('token'));
   }, [dispatch]);

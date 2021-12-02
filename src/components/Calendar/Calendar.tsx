@@ -56,26 +56,17 @@ export default function DataPicker({
   };
 
   function onSubmitCalendar(): void {
-    const date = new Date().toLocaleDateString();
+    const date = new Date();
 
     if (line.length < 1) {
       return alert('error');
     }
-
-    if (date > line[0].toLocaleDateString()) {
+    if (date >= line[0] || date >= line[1]) {
       return alert('error');
     }
-    const start: string = line[0]
-      .toLocaleDateString()
-      .split('/')
-      .reverse()
-      .join('/');
-    console.log(start);
-    const end: string = line[1]
-      .toLocaleDateString()
-      .split('/')
-      .reverse()
-      .join('/');
+    const start: string = line[0].toDateString();
+    const end: string = line[1].toDateString();
+
     const event: OnSubmit = {
       start_day: start,
       end_day: end,

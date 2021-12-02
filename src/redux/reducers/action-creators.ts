@@ -62,25 +62,13 @@ export const onCurrentBooking = createAsyncThunk<
   { rejectValue: Error }
 >('getBooking/action', async (token: Token, thunkAPI) => {
   try {
-    const data = await axiosApiInstance.get<[TypeUserDates]>('booking');
-    console.log(data.data);
-    return data.data;
+    const { data } = await axiosApiInstance.get<[TypeUserDates]>('booking');
+    return data;
   } catch (e) {
     console.log(e);
     return thunkAPI.rejectWithValue({ message: 'error' });
   }
 });
-
-// enum TypeBooking {
-//   'sick leave',
-//   'vacation',
-//   'own expense'
-// }
-// enum StatusBooking {
-//   'pending',
-//   'approved',
-//   'rejected'
-// }
 
 interface OnSubmit {
   start_day: string;
