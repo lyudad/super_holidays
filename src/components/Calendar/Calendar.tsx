@@ -58,6 +58,10 @@ export default function DataPicker({
   function onSubmitCalendar(): void {
     const date = new Date().toLocaleDateString();
 
+    if (line.length < 1) {
+      return alert('error');
+    }
+
     if (date > line[0].toLocaleDateString()) {
       return alert('error');
     }
