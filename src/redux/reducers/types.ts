@@ -1,6 +1,7 @@
 export type TypeUserRole = 'super' | 'admin' | 'user';
 
 export interface User {
+  id: number;
   email: string;
   name: string;
   role: TypeUserRole;
@@ -23,6 +24,7 @@ export interface TypeUserState {
   auth: Auth | null;
   isLoading: boolean;
   error: string | null;
+  users: User[];
 }
 
 export interface TypeUserDates {
@@ -31,4 +33,8 @@ export interface TypeUserDates {
   type: string;
   status: string;
   userId: number;
+}
+
+export interface TypeUsersState {
+  users: User[];
 }

@@ -14,7 +14,9 @@ export default function AppMenu({
   selectedKey,
   changeSelectedKey
 }: Props): JSX.Element {
-  const user = useAppSelector(selector.getUser);
+  const { user } = useAppSelector(selector.getState);
+  const users = useAppSelector(selector.getAllUsers);
+  // console.log(users);
 
   return (
     <Menu

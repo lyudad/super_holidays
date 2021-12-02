@@ -1,4 +1,8 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import selectors from 'redux/selectors';
+import { onGetAllUsers } from 'redux/reducers/action-creators';
 
 import {
   Table,
@@ -57,8 +61,30 @@ const EditableCell: React.FC<EditableCellProps> = ({
 
 export default function UserTable() {
   const [form] = Form.useForm();
-  const [array, setArray] = useState(originData);
+  const [array, setArray] = useState<Data[]>([]);
   const [editingKey, setEditingKey] = useState(0);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(onGetAllUsers('token'));
+  }, [dispatch]);
+
+  const allUsers = useSelector(selectors.getAllUsers);
+
+  const renderUsers = () => {
+    const oneUser = allUsers.map(user => {
+      return {
+        key: user.id,
+        name: user.name,
+        email: user.email,
+        status: user.isBlocked
+      };
+    });
+
+    return oneUser;
+  };
+
+  const dadadadada = renderUsers();
 
   const isEditing = (record: Data) => record.key === editingKey;
 
@@ -111,8 +137,10 @@ export default function UserTable() {
       dataIndex: 'status',
       render: (_: any, record: Data) => {
         const editable = isEditing(record);
+        console.log(record);
         return (
           <CustomSelect
+            defaultValue={record.status ? 'Block' : 'Unblock'}
             disabled={!editable}
             // getPopupContainer={trigger => trigger.parentNode}
           >
@@ -184,7 +212,7 @@ export default function UserTable() {
             }
           }}
           bordered
-          dataSource={data}
+          dataSource={dadadadada}
           columns={mergedColumns}
           pagination={{
             onChange: cancel
