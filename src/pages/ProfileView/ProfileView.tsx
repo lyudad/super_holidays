@@ -1,5 +1,7 @@
-import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import selectors from 'redux/selectors';
+import { onCurrentBooking } from 'redux/reducers/action-creators';
 import ProfileTable from 'components/ProfileTable';
 import Calendar from 'components/Calendar';
 import { Row } from 'antd';
@@ -9,7 +11,12 @@ const date: Date = new Date();
 import { StyledContent, StyledLayout } from './styles';
 
 export default function ProfileView(): JSX.Element {
+  const dispatch = useDispatch();
   const user = useSelector(selectors.getUser);
+  // const dates = useSelector(selectors.getDates);
+  useEffect(() => {
+    dispatch(onCurrentBooking('token'));
+  }, [dispatch]);
   return (
     <StyledLayout>
       <StyledContent>

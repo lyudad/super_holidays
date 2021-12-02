@@ -1,56 +1,45 @@
 import { useState } from 'react';
-import { Data } from './types';
+import { useSelector } from 'react-redux';
+import selectors from 'redux/selectors';
 import { FIRST_PAGE, PAGE_SIZE } from './const';
+import { nanoid } from 'nanoid';
 
 import { Table } from 'antd';
 
-const dataExample = [
-  {
-    key: '1',
-    month: 'July 2021',
-    dates: '10-20',
-    status: 'Pending',
-    type: 'vacation'
-  },
-  {
-    key: '2',
-    month: 'April 2021',
-    dates: '8',
-    status: 'Pending',
-    type: 'vacation'
-  },
-  {
-    key: '3',
-    month: 'May 2021',
-    dates: '12-13',
-    status: 'Pending',
-    type: 'sick leave'
-  },
-  {
-    key: '4',
-    month: 'September 2021',
-    dates: '11-18',
-    status: 'Pending',
-    type: 'vacation'
-  },
-  {
-    key: '5',
-    month: 'Fabruary 2021',
-    dates: '5',
-    status: 'Pending',
-    type: 'sick leave'
-  },
-  {
-    key: '6',
-    month: 'March 2021',
-    dates: '15-16',
-    status: 'Pending',
-    type: 'sick leave'
-  }
-];
-
 export default function ProfileTable(): JSX.Element {
-  const [data] = useState<Data[]>(dataExample);
+  const { dates } = useSelector(selectors.getState);
+
+  const months = [
+    { '01': 'January' },
+    { '02': 'February' },
+    { '03': 'March' },
+    { '04': 'April' },
+    { '05': 'May' },
+    { '06': 'June' },
+    { '07': 'July' },
+    { '08': 'August' },
+    { '09': 'September' },
+    { '10': 'October' },
+    { '11': 'November' },
+    { '12': 'December' }
+  ];
+
+  const dataExample = dates?.map(e => {
+    const startDay = e.start_day.split('')[8] + e.start_day.split('')[9];
+    const endDay = e.end_day.split('')[8] + e.end_day.split('')[9];
+    const month = months.filter(
+      object =>
+        Object.keys(object).join() ===
+        e.start_day.split('')[5] + e.start_day.split('')[6]
+    );
+    return {
+      key: nanoid(),
+      month: Object.values(month[0]).join(),
+      dates: `${startDay}-${endDay}`,
+      status: e.status,
+      type: e.type
+    };
+  });
   const [page] = useState<number>(FIRST_PAGE);
   const [pageSize] = useState<number>(PAGE_SIZE);
 
@@ -79,11 +68,12 @@ export default function ProfileTable(): JSX.Element {
       dataIndex: 'type'
     }
   ];
+
   return (
     <div className="table">
       <Table
         columns={columns}
-        dataSource={data}
+        dataSource={dataExample}
         pagination={{
           current: page,
           pageSize: pageSize

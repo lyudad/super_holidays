@@ -7,6 +7,8 @@ export interface User {
   vacation: number;
   sick_leaves: number;
   id: number;
+  isBlocked: boolean;
+  dates: TypeUserDates[];
 }
 
 export type Token = string;
@@ -22,4 +24,16 @@ export interface TypeUserState {
   auth: Auth | null;
   isLoading: boolean;
   error: string | null;
+  dates: TypeUserDates[];
+}
+
+export interface TypeUserDates {
+  createdAt: string;
+  end_day: string;
+  id: number;
+  start_day: string;
+  status: string;
+  type: string;
+  updatedAt: string;
+  userId: number;
 }

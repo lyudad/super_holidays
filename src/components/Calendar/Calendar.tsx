@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import selectors from 'redux/selectors';
 import Calendar from 'react-calendar';
 import { Select, Modal } from 'antd';
@@ -7,6 +7,7 @@ import { InputWrapper, WrapperButton } from './styles';
 import { eng } from 'helpers/eng';
 import 'react-calendar/dist/Calendar.css';
 import './calendar.css';
+import { onCreateBookingFromUser } from 'redux/reducers/action-creators';
 
 interface DataPickerPropsProps {
   dayToDay: Date;
@@ -16,7 +17,19 @@ interface OnSubmit {
   end_day: string;
   type: string;
   status: string;
-  id: number | null;
+  userId: number | null;
+}
+
+export enum Status {
+  PENDING = 'pending',
+  APPROVED = 'approved',
+  REJECTED = 'rejected'
+}
+
+export enum VacationType {
+  SICK_LEAVE = 'sick_leave',
+  VACATION = 'vacation',
+  OWN_EXPENSE = 'own expense'
 }
 
 type Visible = boolean;
@@ -24,10 +37,11 @@ type Visible = boolean;
 export default function DataPicker({
   dayToDay
 }: DataPickerPropsProps): JSX.Element {
+  const dispatch = useDispatch();
   const stateUser = useSelector(selectors.getUser);
 
   const [line, setLine] = useState<Date[]>([]);
-  const [value, setValue] = useState<string>('Vacation');
+  const [value, setValue] = useState<string>(VacationType.VACATION);
   const [isModalVisible, setIsModalVisible] = useState<Visible>(false);
 
   function onChangeValue(e: string) {
@@ -62,10 +76,10 @@ export default function DataPicker({
       start_day: start,
       end_day: end,
       type: value,
-      status: 'pending',
-      id: stateUser && stateUser.id
+      status: Status.PENDING,
+      userId: stateUser && stateUser.id
     };
-    console.log(event);
+    dispatch(onCreateBookingFromUser(event));
   }
 
   const handleOk = () => {
@@ -114,8 +128,16 @@ export default function DataPicker({
             onChange={onChangeValue}
             style={{ width: '30%' }}
           >
-            <Select.Option value="Vacation">Vacation</Select.Option>
-            <Select.Option value="Sick leave">Sick leave </Select.Option>
+            <Select.Option value={VacationType.VACATION}>
+              {' '}
+              {VacationType.VACATION}
+            </Select.Option>
+            <Select.Option value={VacationType.SICK_LEAVE}>
+              {VacationType.SICK_LEAVE}{' '}
+            </Select.Option>
+            <Select.Option value={VacationType.OWN_EXPENSE}>
+              {VacationType.OWN_EXPENSE}{' '}
+            </Select.Option>
           </Select>
         </div>
       </Modal>

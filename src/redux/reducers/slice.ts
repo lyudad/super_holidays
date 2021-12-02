@@ -1,10 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { User, TypeUserState, Auth } from './types';
+import { User, TypeUserState, Auth, TypeUserDates } from './types';
 import {
   onLogin,
   onCurrentUser,
   onLogout,
-  onCreateBookingFromUser
+  onCreateBookingFromUser,
+  onCurrentBooking
 } from './action-creators';
 
 const initialState: TypeUserState = {
@@ -12,7 +13,8 @@ const initialState: TypeUserState = {
   isLoggedIn: false,
   auth: null,
   isLoading: false,
-  error: null
+  error: null,
+  dates: []
 };
 
 export const userSlice = createSlice({
@@ -33,6 +35,23 @@ export const userSlice = createSlice({
       state.isLoading = false;
     },
     [onLogin.rejected.type]: (state, action: PayloadAction<string>) => {
+      state.error = action.payload;
+      state.isLoading = false;
+    },
+    [onCurrentBooking.pending.type]: state => {
+      state.isLoading = true;
+    },
+    [onCurrentBooking.fulfilled.type]: (
+      state,
+      action: PayloadAction<[TypeUserDates]>
+    ) => {
+      state.dates = action.payload;
+      state.isLoading = false;
+    },
+    [onCurrentBooking.rejected.type]: (
+      state,
+      action: PayloadAction<string>
+    ) => {
       state.error = action.payload;
       state.isLoading = false;
     },
@@ -64,7 +83,11 @@ export const userSlice = createSlice({
     [onCreateBookingFromUser.pending.type]: state => {
       state.isLoading = true;
     },
-    [onCreateBookingFromUser.fulfilled.type]: state => {
+    [onCreateBookingFromUser.fulfilled.type]: (
+      state,
+      action: PayloadAction<TypeUserDates>
+    ) => {
+      state.dates = [action.payload, ...state.dates];
       state.isLoading = false;
     },
     [onCreateBookingFromUser.rejected.type]: state => {

@@ -1,6 +1,6 @@
 import { axiosApiInstance } from 'api/axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { User, Auth, Token } from './types';
+import { User, Auth, Token, TypeUserDates } from './types';
 
 interface LoginUser {
   email: string;
@@ -56,36 +56,51 @@ export const onCurrentUser = createAsyncThunk<
     return thunkAPI.rejectWithValue({ message: 'error' });
   }
 });
+export const onCurrentBooking = createAsyncThunk<
+  [TypeUserDates],
+  Token,
+  { rejectValue: Error }
+>('getBooking/action', async (token: Token, thunkAPI) => {
+  try {
+    const data = await axiosApiInstance.get<[TypeUserDates]>('booking');
+    console.log(data.data);
+    return data.data;
+  } catch (e) {
+    console.log(e);
+    return thunkAPI.rejectWithValue({ message: 'error' });
+  }
+});
+
+// enum TypeBooking {
+//   'sick leave',
+//   'vacation',
+//   'own expense'
+// }
+// enum StatusBooking {
+//   'pending',
+//   'approved',
+//   'rejected'
+// }
 
 interface OnSubmit {
   start_day: string;
   end_day: string;
   type: string;
   status: string;
-  id: number;
-}
-interface ResponseBooking {
-  id: number;
-  start_day: string;
-  end_day: string;
-  type: string;
-  status: string;
-  userId: number;
-  updatedAt: string;
-  createdAt: string;
+  userId: number | null;
 }
 
 export const onCreateBookingFromUser = createAsyncThunk<
-  ResponseBooking,
+  TypeUserDates,
   OnSubmit,
   { rejectValue: Error }
 >('createBooking/action', async (user: OnSubmit, thunkAPI) => {
   try {
-    const response = await axiosApiInstance.post<ResponseBooking>(
+    const { data } = await axiosApiInstance.post<TypeUserDates>(
       'booking',
       user
     );
-    return response.data;
+    return data;
   } catch (e) {
     console.log(e);
     return thunkAPI.rejectWithValue({ message: 'error' });

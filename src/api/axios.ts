@@ -13,9 +13,7 @@ axiosApiInstance.interceptors.request.use(
       const data = JSON.parse(JSON.parse(storagePersist).auth);
       if (data?.accessToken && config.url !== 'auth/refresh') {
         config.headers = {
-          Authorization: `Bearer ${data.accessToken}`,
-          Accept: 'application/json',
-          'Content-Type': 'application/x-www-form-urlencoded'
+          Authorization: `Bearer ${data.accessToken}`
         };
       }
     }
