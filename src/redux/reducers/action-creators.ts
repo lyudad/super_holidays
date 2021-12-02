@@ -94,3 +94,37 @@ export const onCreateBookingFromUser = createAsyncThunk<
     return thunkAPI.rejectWithValue({ message: 'error' });
   }
 });
+
+export const onGetAllUsers = createAsyncThunk<
+  User[],
+  Token,
+  { rejectValue: Error }
+>('getAllUsers/action', async (token: Token, thunkAPI) => {
+  try {
+    const { data } = await axiosApiInstance.get<User[]>('users');
+    console.log(data);
+    return data;
+  } catch (e) {
+    console.log(e);
+    return thunkAPI.rejectWithValue({ message: 'error' });
+  }
+});
+
+export const onUpdateUser = createAsyncThunk<
+  User,
+  User,
+  { rejectValue: Error }
+>('update/action', async (user: User, thunkAPI) => {
+  const { id, ...userData } = user;
+  try {
+    const { data } = await axiosApiInstance.patch<User>(
+      `users/${id}`,
+      userData
+    );
+    console.log(data);
+    return data;
+  } catch (e) {
+    console.log(e);
+    return thunkAPI.rejectWithValue({ message: 'error' });
+  }
+});

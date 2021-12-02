@@ -3,5 +3,5 @@ export interface Selector {
   getState(state: TypeUserState): TypeUserState;
   getUser(state: TypeUserState): User | null;
   getIsLoggedIn(state: TypeUserState): TypeUserState | boolean;
-  // getDates(state: TypeUserState): [Dates] | null;
+  getAllUsers(state: TypeUserState): User[];
 }

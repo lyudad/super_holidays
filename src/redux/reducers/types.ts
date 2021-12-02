@@ -9,6 +9,8 @@ export interface User {
   id: number;
   isBlocked: boolean;
   dates: TypeUserDates[];
+  first_name: string;
+  last_name: string;
 }
 
 export type Token = string;
@@ -25,6 +27,7 @@ export interface TypeUserState {
   isLoading: boolean;
   error: string | null;
   dates: TypeUserDates[];
+  users: User[];
 }
 
 export interface TypeUserDates {

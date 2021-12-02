@@ -5,7 +5,8 @@ import {
   onCurrentUser,
   onLogout,
   onCreateBookingFromUser,
-  onCurrentBooking
+  onCurrentBooking,
+  onGetAllUsers
 } from './action-creators';
 
 const initialState: TypeUserState = {
@@ -14,7 +15,8 @@ const initialState: TypeUserState = {
   auth: null,
   isLoading: false,
   error: null,
-  dates: []
+  dates: [],
+  users: []
 };
 
 export const userSlice = createSlice({
@@ -91,6 +93,16 @@ export const userSlice = createSlice({
       state.isLoading = false;
     },
     [onCreateBookingFromUser.rejected.type]: state => {
+      state.isLoading = false;
+    },
+    [onGetAllUsers.pending.type]: state => {
+      state.isLoading = true;
+    },
+    [onGetAllUsers.fulfilled.type]: (state, action: PayloadAction<User[]>) => {
+      state.users = action.payload;
+      state.isLoading = false;
+    },
+    [onGetAllUsers.rejected.type]: state => {
       state.isLoading = false;
     }
   }
