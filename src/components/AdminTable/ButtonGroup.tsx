@@ -2,6 +2,7 @@ import { useDispatch } from 'react-redux';
 import { onUpdateStatus } from 'redux/reducers/action-creators';
 import { Status } from 'redux/reducers/types';
 import { Button } from 'antd';
+import { useState } from 'react';
 
 interface OnProps {
   onId: number;
@@ -9,6 +10,7 @@ interface OnProps {
 
 export default function ButtonGroup(props: OnProps): JSX.Element {
   const dispatch = useDispatch();
+  const [edit, setEdit] = useState(true);
   const onApprove = () => {
     dispatch(onUpdateStatus({ id: props.onId, status: Status.APPROVED }));
   };
@@ -24,11 +26,13 @@ export default function ButtonGroup(props: OnProps): JSX.Element {
           justifyContent: 'space-around'
         }}
       >
-        <Button onClick={onApprove}>Approve</Button>
-        <Button onClick={onDecline} danger>
+        <Button disabled={edit} onClick={onApprove}>
+          Approve
+        </Button>
+        <Button disabled={edit} onClick={onDecline} danger>
           Decline
         </Button>
-        <Button>Edit</Button>
+        <Button onClick={() => setEdit(!edit)}>Edit</Button>
       </div>
     </>
   );
