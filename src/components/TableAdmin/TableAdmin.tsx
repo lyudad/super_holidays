@@ -65,10 +65,10 @@ export default function TableAdmin(): JSX.Element {
         <TableHead>
           <TableRow>
             <TableCell>Name</TableCell>
-            <TableCell align="right">Email</TableCell>
-            <TableCell align="right">Status</TableCell>
-            <TableCell align="right">Action</TableCell>
-            <TableCell align="right">Password</TableCell>
+            <TableCell align="center">Email</TableCell>
+            <TableCell align="center">Status</TableCell>
+            <TableCell align="center">Action</TableCell>
+            <TableCell align="center">Password</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -87,7 +87,7 @@ export default function TableAdmin(): JSX.Element {
                     }}
                   />
                 </TableCell>
-                <TableCell align="right">
+                <TableCell align="center">
                   <input
                     disabled={edit}
                     defaultValue={row.email}
@@ -96,7 +96,7 @@ export default function TableAdmin(): JSX.Element {
                     }}
                   />
                 </TableCell>
-                <TableCell align="right">
+                <TableCell align="center">
                   <CustomSelect
                     disabled={edit}
                     defaultValue={row.status}
@@ -106,11 +106,16 @@ export default function TableAdmin(): JSX.Element {
                     <Select.Option value="Unblock">Unblock</Select.Option>
                   </CustomSelect>
                 </TableCell>
-                <TableCell align="right">
-                  <Button onClick={() => setEdit(!edit)}>Edit</Button>
+                <TableCell align="center">
+                  <Button
+                    style={{ marginRight: 10 }}
+                    onClick={() => setEdit(!edit)}
+                  >
+                    Edit
+                  </Button>
                   <Button onClick={e => onSubmit(e, row.key)}>Save</Button>
                 </TableCell>
-                <TableCell align="right">
+                <TableCell align="center">
                   <Button>Send password</Button>
                 </TableCell>
               </TableRow>
