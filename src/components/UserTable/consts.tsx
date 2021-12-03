@@ -1,28 +1,36 @@
-import { Data } from './types';
+import { OnName, OnEmail, OnStatus, OnEdit } from './UserColumns';
 
-export const data: Data[] = [
+export const columns = [
   {
-    key: 1,
-    name: 'Ivan Ivanov',
-    email: 'ivanov@mail.ru',
-    status: true
+    title: 'User',
+    dataIndex: 'name',
+    key: 'name',
+    render: (name: string) => {
+      return <OnName name={name} />;
+    }
   },
   {
-    key: 2,
-    name: 'Anatoli Ivanov',
-    email: 'Anatoli@mail.ru',
-    status: true
+    title: 'Email',
+    dataIndex: 'email',
+    key: 'email',
+    render: (email: string) => {
+      return <OnEmail email={email} />;
+    }
   },
   {
-    key: 3,
-    name: 'Alex Ivanov',
-    email: 'Alex@mail.ru',
-    status: true
+    title: 'Status',
+    dataIndex: 'status',
+    key: 'status',
+    render: (status: string) => {
+      return <OnStatus status={status} />;
+    }
   },
   {
-    key: 4,
-    name: 'Steven Ivanov',
-    email: 'Steven@mail.ru',
-    status: true
+    title: 'Action',
+    dataIndex: 'key',
+    key: 'x',
+    render: (key: number): JSX.Element => {
+      return <OnEdit uid={key} />;
+    }
   }
 ];

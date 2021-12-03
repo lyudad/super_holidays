@@ -4,7 +4,8 @@ import {
   onLogin,
   onCurrentUser,
   onLogout,
-  onGetAllUsers
+  onGetAllUsers,
+  onUpdateUser
 } from './action-creators';
 
 const initialState: TypeUserState = {
@@ -69,6 +70,16 @@ export const userSlice = createSlice({
       state.users = action.payload;
     },
     [onGetAllUsers.rejected.type]: (state, action: PayloadAction<string>) => {
+      state.error = action.payload;
+      state.isLoading = false;
+    },
+    [onUpdateUser.pending.type]: state => {
+      state.isLoading = true;
+    },
+    [onUpdateUser.fulfilled.type]: state => {
+      state.isLoading = false;
+    },
+    [onUpdateUser.rejected.type]: (state, action: PayloadAction<string>) => {
       state.error = action.payload;
       state.isLoading = false;
     }

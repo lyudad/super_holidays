@@ -1,6 +1,6 @@
 import { axiosApiInstance } from 'api/axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { User, Auth, Token } from './types';
+import { User, Auth, Token, UserUpdate } from './types';
 
 interface LoginUser {
   email: string;
@@ -67,7 +67,7 @@ export const onGetAllUsers = createAsyncThunk<
 >('getAllUsers/action', async (token: Token, thunkAPI) => {
   try {
     const { data } = await axiosApiInstance.get<User[]>('users');
-    console.log(data);
+    // console.log(data);
     return data;
   } catch (e) {
     console.log(e);
@@ -77,16 +77,14 @@ export const onGetAllUsers = createAsyncThunk<
 
 export const onUpdateUser = createAsyncThunk<
   User,
-  User,
+  UserUpdate,
   { rejectValue: Error }
->('update/action', async (user: User, thunkAPI) => {
-  const { id, ...userData } = user;
+>('update/action', async (user: UserUpdate, thunkAPI) => {
+  console.log('отправили', user);
+  const { id } = user;
   try {
-    const { data } = await axiosApiInstance.patch<User>(
-      `users/${id}`,
-      userData
-    );
-    console.log(data);
+    const { data } = await axiosApiInstance.patch<User>(`users/${id}`, user);
+    console.log('приняли', data);
     return data;
   } catch (e) {
     console.log(e);

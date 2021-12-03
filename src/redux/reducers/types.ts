@@ -11,6 +11,18 @@ export interface User {
   dates: [TypeUserDates];
 }
 
+export interface UserUpdate {
+  id: number;
+  email?: string;
+  first_name?: string;
+  last_name?: string;
+  role?: TypeUserRole;
+  isBlocked?: boolean;
+  vacation?: number;
+  sick_leaves?: number;
+  dates?: [TypeUserDates];
+}
+
 export type Token = string;
 
 export interface Auth {
