@@ -15,7 +15,6 @@ export default function AdminTable(): JSX.Element {
     }
   }, [dispatch, users.length]);
   const newData = users.map(e => {
-    console.log(e);
     return {
       key: e.id,
       block: e.isBlocked,
