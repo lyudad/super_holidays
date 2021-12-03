@@ -15,10 +15,11 @@ export default function AdminTable(): JSX.Element {
     }
   }, [dispatch, users.length]);
   const newData = users.map(e => {
+    console.log(e);
     return {
       key: e.id,
       block: e.isBlocked,
-      name: `${e.first_name} ${e.last_name}`,
+      name: e.name,
       dates: e.dates[0]
         ? `${e.dates[0].start_day} -- ${e.dates[0].end_day}`
         : 'none',
