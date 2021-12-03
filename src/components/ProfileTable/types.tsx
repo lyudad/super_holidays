@@ -5,3 +5,13 @@ export interface Data {
   status: string;
   type: string;
 }
+export interface TypeOFDates {
+  createdAt: string;
+  end_day: string;
+  id: number;
+  start_day: string;
+  status: string;
+  type: string;
+  updatedAt: string;
+  userId: number;
+}

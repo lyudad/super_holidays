@@ -1,6 +1,6 @@
 import { axiosApiInstance } from 'api/axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { User, Auth, Token, UserUpdate } from './types';
+import { User, Auth, Token, TypeUserDates, Status, UserUpdate } from './types';
 
 interface LoginUser {
   email: string;
@@ -59,6 +59,44 @@ export const onCurrentUser = createAsyncThunk<
     return thunkAPI.rejectWithValue({ message: 'error' });
   }
 });
+export const onCurrentBooking = createAsyncThunk<
+  [TypeUserDates],
+  Token,
+  { rejectValue: Error }
+>('getBooking/action', async (token: Token, thunkAPI) => {
+  try {
+    const { data } = await axiosApiInstance.get<[TypeUserDates]>('booking');
+    return data;
+  } catch (e) {
+    console.log(e);
+    return thunkAPI.rejectWithValue({ message: 'error' });
+  }
+});
+
+interface OnSubmit {
+  start_day: string;
+  end_day: string;
+  type: string;
+  status: string;
+  userId: number | null;
+}
+
+export const onCreateBookingFromUser = createAsyncThunk<
+  TypeUserDates,
+  OnSubmit,
+  { rejectValue: Error }
+>('createBooking/action', async (user: OnSubmit, thunkAPI) => {
+  try {
+    const { data } = await axiosApiInstance.post<TypeUserDates>(
+      'booking',
+      user
+    );
+    return data;
+  } catch (e) {
+    console.log(e);
+    return thunkAPI.rejectWithValue({ message: 'error' });
+  }
+});
 
 export const onGetAllUsers = createAsyncThunk<
   User[],
@@ -67,7 +105,6 @@ export const onGetAllUsers = createAsyncThunk<
 >('getAllUsers/action', async (token: Token, thunkAPI) => {
   try {
     const { data } = await axiosApiInstance.get<User[]>('users');
-    // console.log(data);
     return data;
   } catch (e) {
     console.log(e);
@@ -85,6 +122,28 @@ export const onUpdateUser = createAsyncThunk<
   try {
     const { data } = await axiosApiInstance.patch<User>(`users/${id}`, user);
     console.log('приняли', data);
+    return data;
+  } catch (e) {
+    console.log(e);
+    return thunkAPI.rejectWithValue({ message: 'error' });
+  }
+});
+
+interface OnStatus {
+  id: number;
+  status: Status;
+}
+export const onUpdateStatus = createAsyncThunk<
+  TypeUserDates,
+  OnStatus,
+  { rejectValue: Error }
+>('updateStatus/action', async (obj: OnStatus, thunkAPI) => {
+  try {
+    const { data } = await axiosApiInstance.patch<TypeUserDates>(
+      `booking/${obj.id}/status`,
+      { status: obj.status }
+    );
+    console.log(data);
     return data;
   } catch (e) {
     console.log(e);
