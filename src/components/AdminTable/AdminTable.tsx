@@ -4,7 +4,6 @@ import selectors from 'redux/selectors';
 import { onGetAllUsers } from 'redux/reducers/action-creators';
 import { Table } from 'antd';
 import { columns } from './consts';
-import ChoseType from './choseType';
 
 export default function AdminTable(): JSX.Element {
   const dispatch = useDispatch();
@@ -15,7 +14,6 @@ export default function AdminTable(): JSX.Element {
       dispatch(onGetAllUsers('token'));
     }
   }, [dispatch, users.length]);
-  console.log(users);
   const newData = users.map(e => {
     return {
       key: e.id,
@@ -24,11 +22,9 @@ export default function AdminTable(): JSX.Element {
       dates: e.dates[0]
         ? `${e.dates[0].start_day} -- ${e.dates[0].end_day}`
         : 'none',
-      type: <ChoseType />,
-      approve: true
+      type: e.dates[0] ? e.dates[0].type : 'none'
     };
   });
-  console.log(newData);
 
   return <Table columns={columns} dataSource={newData} />;
 }

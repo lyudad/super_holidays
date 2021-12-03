@@ -40,3 +40,15 @@ export interface TypeUserDates {
   updatedAt: string;
   userId: number;
 }
+
+export enum Status {
+  PENDING = 'pending',
+  APPROVED = 'approved',
+  REJECTED = 'rejected'
+}
+
+export enum VacationType {
+  SICK_LEAVE = 'sick_leave',
+  VACATION = 'vacation',
+  OWN_EXPENSE = 'own expense'
+}
