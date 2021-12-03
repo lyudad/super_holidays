@@ -13,9 +13,11 @@ export default function ButtonGroup(props: OnProps): JSX.Element {
   const [edit, setEdit] = useState(true);
   const onApprove = () => {
     dispatch(onUpdateStatus({ id: props.onId, status: Status.APPROVED }));
+    setEdit(!edit);
   };
   const onDecline = () => {
     dispatch(onUpdateStatus({ id: props.onId, status: Status.REJECTED }));
+    setEdit(!edit);
   };
   return (
     <>
