@@ -8,6 +8,9 @@ export interface User {
   isBlocked: boolean;
   vacation: number;
   sick_leaves: number;
+  first_name: string;
+  last_name: string;
+  dates: TypeUserDates[];
 }
 
 export interface UserUpdate {
