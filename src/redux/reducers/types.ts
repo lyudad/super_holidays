@@ -2,7 +2,6 @@ export type TypeUserRole = 'super' | 'admin' | 'user';
 
 export interface User {
   email: string;
-  name: string;
   role: TypeUserRole;
   vacation: number;
   sick_leaves: number;

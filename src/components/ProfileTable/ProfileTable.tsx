@@ -12,8 +12,7 @@ export default function ProfileTable(): JSX.Element {
   const dataExample = dates?.map(e => {
     return {
       key: nanoid(),
-      month: `${e.start_day.split(' ')[1]} - ${e.start_day.split(' ')[3]}`,
-      dates: `${e.start_day.split(' ')[2]}-${e.end_day.split(' ')[2]}`,
+      dates: `${e.start_day} - ${e.end_day}`,
       status: e.status,
       type: e.type
     };
@@ -24,12 +23,7 @@ export default function ProfileTable(): JSX.Element {
   const columns = [
     {
       key: '1',
-      title: 'month',
-      dataIndex: 'month'
-    },
-    {
-      key: '2',
-      title: 'dates',
+      title: 'Dates',
       dataIndex: 'dates'
     },
     {
