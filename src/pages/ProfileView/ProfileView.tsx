@@ -12,7 +12,10 @@ export default function ProfileView(): JSX.Element {
     <StyledLayout>
       <StyledContent>
         <Row style={{ marginBottom: '30px' }}>
-          <h1 style={{ fontSize: '25px' }}>{user?.name}</h1>
+          <h1 style={{ fontSize: '25px' }}>
+            {user?.first_name}
+            {user?.last_name}
+          </h1>
         </Row>
         <Row style={{ marginBottom: '30px' }}>
           <p style={{ fontSize: '20px', marginRight: '50px' }}>

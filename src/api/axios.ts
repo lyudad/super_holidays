@@ -14,8 +14,8 @@ axiosApiInstance.interceptors.request.use(
       if (data?.accessToken && config.url !== 'auth/refresh') {
         config.headers = {
           Authorization: `Bearer ${data.accessToken}`,
-          Accept: 'application/json',
-          'Content-Type': 'application/x-www-form-urlencoded'
+          Accept: 'application/json'
+          // 'Content-Type': 'application/x-www-form-urlencoded'
         };
       }
     }

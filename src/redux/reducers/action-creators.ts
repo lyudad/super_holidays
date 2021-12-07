@@ -30,6 +30,7 @@ export const onLogin = createAsyncThunk<
     return thunkAPI.rejectWithValue({ message: 'error' });
   }
 });
+
 export const onLogout = createAsyncThunk<{ rejectValue: Error }>(
   'logout/action',
   async (_, thunkAPI) => {
@@ -50,6 +51,43 @@ export const onCurrentUser = createAsyncThunk<
 >('getCurrentUser/action', async (token: Token, thunkAPI) => {
   try {
     const { data } = await axiosApiInstance.get<User>('users/current');
+    return data;
+  } catch (e) {
+    console.log(e);
+    return thunkAPI.rejectWithValue({ message: 'error' });
+  }
+});
+
+export const onGetAllUsers = createAsyncThunk<
+  User[],
+  Token,
+  { rejectValue: Error }
+>('getAllUsers/action', async (token: Token, thunkAPI) => {
+  try {
+    const { data } = await axiosApiInstance.get<User[]>('users');
+    // console.log(data);
+    return data;
+  } catch (e) {
+    console.log(e);
+    return thunkAPI.rejectWithValue({ message: 'error' });
+  }
+});
+
+interface OnBlocked {
+  id: number;
+  isBlocked: boolean;
+}
+export const onUpdateBlock = createAsyncThunk<
+  User,
+  OnBlocked,
+  { rejectValue: Error }
+>('updateBlock/action', async (obj: OnBlocked, thunkAPI) => {
+  const { id, ...objData } = obj;
+  try {
+    const { data } = await axiosApiInstance.patch<User>(
+      `users/${obj.id}/block`,
+      objData
+    );
     return data;
   } catch (e) {
     console.log(e);
