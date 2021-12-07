@@ -9,19 +9,6 @@ export interface User {
   isBlocked: boolean;
   vacation: number;
   sick_leaves: number;
-  dates: [TypeUserDates];
-}
-
-export interface UserUpdate {
-  id: number;
-  email?: string;
-  first_name?: string;
-  last_name?: string;
-  role?: TypeUserRole;
-  isBlocked?: boolean;
-  vacation?: number;
-  sick_leaves?: number;
-  dates?: [TypeUserDates];
 }
 
 export type Token = string;
@@ -47,4 +34,9 @@ export interface TypeUserDates {
   type: string;
   status: string;
   userId: number;
+}
+
+export interface OnBlocked {
+  id: number;
+  isBlocked: boolean;
 }

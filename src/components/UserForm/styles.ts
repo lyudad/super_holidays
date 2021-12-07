@@ -3,9 +3,9 @@ import { Form, Button } from 'antd';
 
 export const CustomForm = styled(Form)`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
-  grid-gap: 1rem;
-  margin-bottom: 4rem;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-gap: 15px;
+  margin-bottom: 65px;
 `;
 
 export const CustomItem = styled(Form.Item)`

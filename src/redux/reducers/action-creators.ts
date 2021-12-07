@@ -1,6 +1,6 @@
 import { axiosApiInstance } from 'api/axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { User, Auth, Token } from './types';
+import { User, Auth, Token, OnBlocked } from './types';
 
 interface LoginUser {
   email: string;
@@ -73,10 +73,6 @@ export const onGetAllUsers = createAsyncThunk<
   }
 });
 
-interface OnBlocked {
-  id: number;
-  isBlocked: boolean;
-}
 export const onUpdateBlock = createAsyncThunk<
   User,
   OnBlocked,
