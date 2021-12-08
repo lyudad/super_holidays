@@ -4,6 +4,7 @@ import { onUpdateBlock } from 'redux/reducers/action-creators';
 import selectors from 'redux/selectors';
 
 import { Button, Table } from 'antd';
+import { useMemo } from 'react';
 
 interface User {
   key: number;
@@ -15,16 +16,19 @@ interface User {
 export default function UsersTable(): JSX.Element {
   const dispatch = useDispatch();
   const allUsers = useSelector(selectors.getAllUsers);
-  console.log(allUsers);
 
-  const renderUsers: User[] = allUsers.map(user => {
-    return {
-      key: user.id,
-      name: `${user.first_name} ${user.last_name}`,
-      email: user.email,
-      isBlocked: user.isBlocked
-    };
-  });
+  const renderUsers: User[] = useMemo(
+    () =>
+      allUsers.map(user => {
+        return {
+          key: user.id,
+          name: `${user.first_name} ${user.last_name}`,
+          email: user.email,
+          isBlocked: user.isBlocked
+        };
+      }),
+    [allUsers]
+  );
 
   const columns = [
     { title: 'User', dataIndex: 'name' },
@@ -35,6 +39,7 @@ export default function UsersTable(): JSX.Element {
       render: (_: any, record: User): JSX.Element => {
         return record.isBlocked ? (
           <Button
+            danger
             onClick={() => {
               dispatch(onUpdateBlock({ id: record.key, isBlocked: false }));
             }}
@@ -43,7 +48,6 @@ export default function UsersTable(): JSX.Element {
           </Button>
         ) : (
           <Button
-            danger
             onClick={() => {
               dispatch(onUpdateBlock({ id: record.key, isBlocked: true }));
             }}

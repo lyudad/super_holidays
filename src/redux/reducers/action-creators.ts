@@ -65,7 +65,6 @@ export const onGetAllUsers = createAsyncThunk<
 >('getAllUsers/action', async (token: Token, thunkAPI) => {
   try {
     const { data } = await axiosApiInstance.get<User[]>('users');
-    // console.log(data);
     return data;
   } catch (e) {
     console.log(e);
