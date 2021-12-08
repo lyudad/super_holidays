@@ -1,12 +1,9 @@
-import { useDispatch, useSelector } from 'react-redux';
-
-import { onUpdateBlock } from 'redux/reducers/action-creators';
-import selectors from 'redux/selectors';
-
+import React, { useEffect, useState } from 'react';
+import { axiosApiInstance } from 'api/axios';
+import { User } from 'redux/reducers/types';
 import { Button, Table } from 'antd';
-import { useMemo } from 'react';
 
-interface User {
+interface RenderUser {
   key: number;
   name: string;
   email: string;
@@ -14,21 +11,38 @@ interface User {
 }
 
 export default function UsersTable(): JSX.Element {
-  const dispatch = useDispatch();
-  const allUsers = useSelector(selectors.getAllUsers);
+  const [state, setState] = useState<User[]>([]);
 
-  const renderUsers: User[] = useMemo(
-    () =>
-      allUsers.map(user => {
-        return {
-          key: user.id,
-          name: `${user.first_name} ${user.last_name}`,
-          email: user.email,
-          isBlocked: user.isBlocked
-        };
-      }),
-    [allUsers]
-  );
+  const fetchData = async () => {
+    try {
+      const { data } = await axiosApiInstance.get('users');
+      setState(data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const renderUsers: RenderUser[] = state.map(user => {
+    return {
+      key: user.id,
+      name: `${user.first_name} ${user.last_name}`,
+      email: user.email,
+      isBlocked: user.isBlocked
+    };
+  });
+
+  const onHandlerClick = async (id: number, status: boolean) => {
+    try {
+      await axiosApiInstance.patch(`users/${id}/block`, { isBlocked: status });
+      await fetchData();
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   const columns = [
     { title: 'User', dataIndex: 'name' },
@@ -36,22 +50,13 @@ export default function UsersTable(): JSX.Element {
     {
       title: 'Status',
       dataIndex: 'isBlocked',
-      render: (_: any, record: User): JSX.Element => {
+      render: (_: any, record: RenderUser): JSX.Element => {
         return record.isBlocked ? (
-          <Button
-            danger
-            onClick={() => {
-              dispatch(onUpdateBlock({ id: record.key, isBlocked: false }));
-            }}
-          >
+          <Button danger onClick={() => onHandlerClick(record.key, false)}>
             Unblock
           </Button>
         ) : (
-          <Button
-            onClick={() => {
-              dispatch(onUpdateBlock({ id: record.key, isBlocked: true }));
-            }}
-          >
+          <Button onClick={() => onHandlerClick(record.key, true)}>
             Block
           </Button>
         );

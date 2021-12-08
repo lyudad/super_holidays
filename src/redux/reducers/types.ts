@@ -25,7 +25,6 @@ export interface TypeUserState {
   auth: Auth | null;
   isLoading: boolean;
   error: string | null;
-  users: User[];
 }
 
 export interface TypeUserDates {
@@ -34,9 +33,4 @@ export interface TypeUserDates {
   type: string;
   status: string;
   userId: number;
-}
-
-export interface OnBlocked {
-  id: number;
-  isBlocked: boolean;
 }

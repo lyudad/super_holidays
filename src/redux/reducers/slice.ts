@@ -1,20 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { User, TypeUserState, Auth } from './types';
-import {
-  onLogin,
-  onLogout,
-  onCurrentUser,
-  onGetAllUsers,
-  onUpdateBlock
-} from './action-creators';
+import { onLogin, onLogout, onCurrentUser } from './action-creators';
 
 const initialState: TypeUserState = {
   user: null,
   isLoggedIn: false,
   auth: null,
   isLoading: false,
-  error: null,
-  users: []
+  error: null
 };
 
 export const userSlice = createSlice({
@@ -61,33 +54,6 @@ export const userSlice = createSlice({
     },
     [onCurrentUser.rejected.type]: (state, action: PayloadAction<string>) => {
       state.error = action.payload;
-      state.isLoading = false;
-    },
-    [onGetAllUsers.pending.type]: state => {
-      state.isLoading = false;
-    },
-    [onGetAllUsers.fulfilled.type]: (state, action: PayloadAction<User[]>) => {
-      state.users = action.payload;
-    },
-    [onGetAllUsers.rejected.type]: (state, action: PayloadAction<string>) => {
-      state.error = action.payload;
-      state.isLoading = false;
-    },
-    [onUpdateBlock.pending.type]: state => {
-      state.isLoading = true;
-    },
-    [onUpdateBlock.fulfilled.type]: (state, action: PayloadAction<User>) => {
-      state.users = [
-        ...state.users.map(item => {
-          if (item.id === action.payload.id) {
-            item.isBlocked = action.payload.isBlocked;
-          }
-          return item;
-        })
-      ];
-      state.isLoading = false;
-    },
-    [onUpdateBlock.rejected.type]: state => {
       state.isLoading = false;
     }
   }
