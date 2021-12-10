@@ -1,24 +1,30 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, Dispatch, SetStateAction } from 'react';
 import { axiosApiInstance } from 'api/axios';
 import { User } from 'redux/reducers/types';
 import { Button, Table } from 'antd';
 import { StyledInput } from './styles';
 
-export default function UsersTable(): JSX.Element {
-  const [searchData, setSearchData] = useState<User[]>([]);
+interface Props {
+  searchData: User[];
+  setSearchData: Dispatch<SetStateAction<User[]>>;
+}
 
-  const fetchData = async () => {
+export default function UsersTable({
+  searchData,
+  setSearchData
+}: Props): JSX.Element {
+  const fetchData = useCallback(async () => {
     try {
       const { data } = await axiosApiInstance.get('users');
       setSearchData(data);
     } catch (e) {
       console.log(e);
     }
-  };
+  }, [setSearchData]);
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData]);
 
   const onFilterContacts = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.currentTarget.value) {
@@ -80,6 +86,7 @@ export default function UsersTable(): JSX.Element {
   return (
     <>
       <StyledInput
+        size="small"
         type="text"
         onChange={onFilterContacts}
         placeholder="Search..."
