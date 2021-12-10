@@ -5,13 +5,12 @@ import { Button, Table } from 'antd';
 import { StyledInput } from './styles';
 
 export default function UsersTable(): JSX.Element {
-  const [state, setState] = useState<User[]>([]);
-  const [query, setQuery] = useState('');
+  const [searchData, setSearchData] = useState<User[]>([]);
 
   const fetchData = async () => {
     try {
       const { data } = await axiosApiInstance.get('users');
-      setState(data);
+      setSearchData(data);
     } catch (e) {
       console.log(e);
     }
@@ -22,15 +21,14 @@ export default function UsersTable(): JSX.Element {
   }, []);
 
   const onFilterContacts = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setQuery(e.target.value);
-    if (query) {
-      const normalizeFilter = query.toLowerCase();
-      const filterValue = state.filter(
+    if (e.currentTarget.value) {
+      const normalizeFilter = e.currentTarget.value.toLowerCase();
+      const filterValue = searchData.filter(
         ({ first_name, last_name }) =>
           first_name.toLowerCase().includes(normalizeFilter) ||
           last_name.toLowerCase().includes(normalizeFilter)
       );
-      setState(filterValue);
+      setSearchData(filterValue);
     } else {
       fetchData();
     }
@@ -46,8 +44,17 @@ export default function UsersTable(): JSX.Element {
   };
 
   const columns = [
-    { title: 'Name', dataIndex: 'first_name' },
-    { title: 'Surname', dataIndex: 'last_name' },
+    {
+      title: 'User',
+      dataIndex: 'full name',
+      render: (_: any, record: User): JSX.Element => {
+        return (
+          <div>
+            {record.first_name} {record.last_name}
+          </div>
+        );
+      }
+    },
     { title: 'Email', dataIndex: 'email' },
     {
       title: 'Status',
@@ -74,14 +81,13 @@ export default function UsersTable(): JSX.Element {
     <>
       <StyledInput
         type="text"
-        value={query}
         onChange={onFilterContacts}
         placeholder="Search..."
       />
       <Table
         rowKey={record => record.id}
         columns={columns}
-        dataSource={state}
+        dataSource={searchData}
       />
     </>
   );
