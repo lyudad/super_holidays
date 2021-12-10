@@ -1,16 +1,24 @@
+import React, { Dispatch, SetStateAction } from 'react';
 import { Input, Form } from 'antd';
 import { eng } from 'helpers/eng';
 import { emailPattern } from 'helpers/patterns';
 import { axiosApiInstance } from 'api/axios';
+import { User } from 'redux/reducers/types';
 
 import { CustomForm, CustomItem, CustomButton } from './styles';
 
-export default function UserForm(): JSX.Element {
+interface Props {
+  setSearchData: Dispatch<SetStateAction<User[]>>;
+}
+
+export default function UserForm({ setSearchData }: Props): JSX.Element {
   const [form] = Form.useForm();
 
   const onFinish = async (values: string) => {
     try {
       await axiosApiInstance.post(`users`, values);
+      const { data } = await axiosApiInstance.get('users');
+      setSearchData(data);
       form.resetFields();
     } catch (e) {
       console.log(e);
