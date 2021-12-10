@@ -13,8 +13,8 @@ interface DataPickerPropsProps {
   dayToDay: Date;
 }
 interface OnSubmit {
-  start_day: string;
-  end_day: string;
+  start_day: Date;
+  end_day: Date;
   type: string;
   status: string;
   userId: number | null;
@@ -64,8 +64,8 @@ export default function DataPicker({
     if (date >= line[0] || date >= line[1]) {
       return alert('error');
     }
-    const start: string = line[0].toDateString();
-    const end: string = line[1].toDateString();
+    const start: Date = line[0];
+    const end: Date = line[1];
 
     const event: OnSubmit = {
       start_day: start,

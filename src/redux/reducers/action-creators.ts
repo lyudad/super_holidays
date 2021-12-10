@@ -71,8 +71,8 @@ export const onCurrentBooking = createAsyncThunk<
 });
 
 interface OnSubmit {
-  start_day: string;
-  end_day: string;
+  start_day: Date;
+  end_day: Date;
   type: string;
   status: string;
   userId: number | null;
