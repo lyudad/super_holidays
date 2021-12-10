@@ -1,17 +1,18 @@
 import { configureStore } from '@reduxjs/toolkit';
-import storage from 'redux-persist/lib/storage';
 import { persistReducer } from 'redux-persist';
-import user from './reducers/slice';
+import storage from 'redux-persist/lib/storage';
+import userReducer from './reducers/slice';
 
 const persistConfig = {
   key: 'auth',
   storage,
-  whitelist: ['auth', 'user']
+  whitelist: ['auth', 'user', 'isLoggedIn']
 };
-const persistedReducer = persistReducer(persistConfig, user);
+const persistedReducer = persistReducer(persistConfig, userReducer);
 
 export const store = configureStore({
   reducer: persistedReducer,
+
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: {
@@ -20,5 +21,6 @@ export const store = configureStore({
     }),
   devTools: process.env.NODE_ENV !== 'production'
 });
+
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

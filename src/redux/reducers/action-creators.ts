@@ -30,6 +30,7 @@ export const onLogin = createAsyncThunk<
     return thunkAPI.rejectWithValue({ message: 'error' });
   }
 });
+
 export const onLogout = createAsyncThunk<{ rejectValue: Error }>(
   'logout/action',
   async (_, thunkAPI) => {

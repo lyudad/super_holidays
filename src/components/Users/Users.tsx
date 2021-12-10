@@ -1,5 +1,5 @@
-import UserTable from 'components/UserTable';
-import AddInput from 'components/Input';
+import UsersTable from 'components/UsersTable';
+import UserForm from 'components/UserForm';
 
 import { StyledContent, StyledLayout } from './styles';
 
@@ -7,8 +7,8 @@ export default function Users(): JSX.Element {
   return (
     <StyledLayout>
       <StyledContent>
-        <AddInput />
-        <UserTable />
+        <UserForm />
+        <UsersTable />
       </StyledContent>
     </StyledLayout>
   );
