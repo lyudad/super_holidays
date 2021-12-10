@@ -80,6 +80,7 @@ export default function UsersTable(): JSX.Element {
   return (
     <>
       <StyledInput
+        size="small"
         type="text"
         onChange={onFilterContacts}
         placeholder="Search..."

@@ -1,14 +1,20 @@
 import { Input, Form } from 'antd';
 import { eng } from 'helpers/eng';
 import { emailPattern } from 'helpers/patterns';
+import { axiosApiInstance } from 'api/axios';
 
 import { CustomForm, CustomItem, CustomButton } from './styles';
 
 export default function UserForm(): JSX.Element {
   const [form] = Form.useForm();
 
-  const onFinish = (values: any) => {
-    console.log('Finish:', values);
+  const onFinish = async (values: string) => {
+    try {
+      await axiosApiInstance.post(`users`, values);
+      form.resetFields();
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
