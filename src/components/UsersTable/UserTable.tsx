@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, Dispatch, SetStateAction } from 'react';
 import { axiosApiInstance } from 'api/axios';
 import { User } from 'redux/reducers/types';
-import { Button, Table } from 'antd';
-import { StyledInput } from './styles';
+import { Button, Table, Input } from 'antd';
+import { SearchOutlined } from '@ant-design/icons';
 
 interface Props {
   searchData: User[];
@@ -53,6 +53,18 @@ export default function UsersTable({
     {
       title: 'User',
       dataIndex: 'full name',
+      filterIcon: () => {
+        return <SearchOutlined />;
+      },
+      filterDropdown: () => {
+        return (
+          <Input
+            type="text"
+            onChange={onFilterContacts}
+            placeholder="Search..."
+          />
+        );
+      },
       render: (_: any, record: User): JSX.Element => {
         return (
           <div>
@@ -84,18 +96,10 @@ export default function UsersTable({
   ];
 
   return (
-    <>
-      <StyledInput
-        size="small"
-        type="text"
-        onChange={onFilterContacts}
-        placeholder="Search..."
-      />
-      <Table
-        rowKey={record => record.id}
-        columns={columns}
-        dataSource={searchData}
-      />
-    </>
+    <Table
+      rowKey={record => record.id}
+      columns={columns}
+      dataSource={searchData}
+    />
   );
 }
