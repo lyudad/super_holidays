@@ -27,7 +27,7 @@ export enum Status {
 }
 
 export enum VacationType {
-  SICK_LEAVE = 'sick_leave',
+  SICK_LEAVE = 'sick leave',
   VACATION = 'vacation',
   OWN_EXPENSE = 'own expense'
 }
@@ -64,12 +64,10 @@ export default function DataPicker({
     if (date >= line[0] || date >= line[1]) {
       return alert('error');
     }
-    const start: Date = line[0];
-    const end: Date = line[1];
 
     const event: OnSubmit = {
-      start_day: start,
-      end_day: end,
+      start_day: line[0],
+      end_day: line[1],
       type: value,
       status: Status.PENDING,
       userId: stateUser && stateUser.id

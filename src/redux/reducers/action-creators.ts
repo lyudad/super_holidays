@@ -56,13 +56,16 @@ export const onCurrentUser = createAsyncThunk<
     return thunkAPI.rejectWithValue({ message: 'error' });
   }
 });
+type OnId = number;
 export const onCurrentBooking = createAsyncThunk<
   [TypeUserDates],
-  Token,
+  OnId,
   { rejectValue: Error }
->('getBooking/action', async (token: Token, thunkAPI) => {
+>('getBooking/action', async (id: OnId, thunkAPI) => {
   try {
-    const { data } = await axiosApiInstance.get<[TypeUserDates]>('booking');
+    const { data } = await axiosApiInstance.get<[TypeUserDates]>(
+      `booking/${id}`
+    );
     return data;
   } catch (e) {
     console.log(e);

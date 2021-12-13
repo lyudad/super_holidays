@@ -14,8 +14,10 @@ export default function ProfileView(): JSX.Element {
   const dispatch = useDispatch();
   const user = useSelector(selectors.getUser);
   useEffect(() => {
-    dispatch(onCurrentBooking('token'));
-  }, [dispatch]);
+    if (user && user.id) {
+      dispatch(onCurrentBooking(user.id));
+    }
+  }, [dispatch, user]);
   return (
     <StyledLayout>
       <StyledContent>
