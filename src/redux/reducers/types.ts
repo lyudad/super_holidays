@@ -19,6 +19,7 @@ export interface Auth {
   refreshToken: string;
   sid: string;
 }
+
 export interface TypeUserState {
   isLoggedIn: boolean;
   user: User | null;
@@ -50,4 +51,12 @@ export enum VacationType {
   SICK_LEAVE = 'sick_leave',
   VACATION = 'vacation',
   OWN_EXPENSE = 'own expense'
+}
+
+export interface TypeUserDates {
+  start_day: string;
+  end_day: string;
+  type: string;
+  status: string;
+  userId: number;
 }
