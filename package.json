@@ -17,6 +17,7 @@
     "antd": "^4.16.13",
     "axios": "^0.24.0",
     "date-fns": "^2.25.0",
+    "nanoid": "^3.1.30",
     "rc-menu": "^9.0.14",
     "react": "^17.0.2",
     "react-calendar": "^3.5.0",
@@ -40,7 +41,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint --fix .",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "predeploy": "npm run build",
+    "deploy": "netlify deploy -p"
   },
   "browserslist": {
     "production": [
@@ -73,6 +76,7 @@
     "eslint-plugin-react-hooks": "1.7.0",
     "husky": "^7.0.4",
     "lint-staged": "^11.2.6",
+    "netlify-cli": "^8.0.14",
     "prettier": "^2.4.1"
   },
   "husky": {
