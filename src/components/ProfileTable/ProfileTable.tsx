@@ -3,8 +3,6 @@ import { useSelector } from 'react-redux';
 import { TypeUserDates } from 'redux/reducers/types';
 import selectors from 'redux/selectors';
 import { FIRST_PAGE, PAGE_SIZE } from './const';
-// import { nanoid } from 'nanoid';
-
 import { Table } from 'antd';
 
 export default function ProfileTable(): JSX.Element {
@@ -17,7 +15,7 @@ export default function ProfileTable(): JSX.Element {
       key: '1',
       title: 'Dates',
       dataIndex: 'dates',
-      render: (e: TypeUserDates) => {
+      render: (_: any, e: TypeUserDates): JSX.Element => {
         return (
           <p>
             {e.start_day} - {e.end_day}{' '}
@@ -29,7 +27,7 @@ export default function ProfileTable(): JSX.Element {
       key: '3',
       title: 'status',
       dataIndex: 'approved',
-      render: (approved: boolean) => {
+      render: (approved: boolean): JSX.Element => {
         return <p>{approved ? 'approve' : 'pending'}</p>;
       }
     },
@@ -43,6 +41,7 @@ export default function ProfileTable(): JSX.Element {
   return (
     <div className="table">
       <Table
+        rowKey={record => record.id}
         columns={columns}
         dataSource={dates}
         pagination={{
