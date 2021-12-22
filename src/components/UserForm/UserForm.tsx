@@ -16,7 +16,10 @@ export default function UserForm({ setSearchData }: Props): JSX.Element {
 
   const onFinish = async (values: string) => {
     try {
-      const { data } = await axiosApiInstance.post<User>(`users`, values);
+      const { data } = await axiosApiInstance.post<User>(
+        `auth/registration`,
+        values
+      );
       setSearchData(prev => {
         return [data, ...prev];
       });
