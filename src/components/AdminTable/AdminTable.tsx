@@ -60,11 +60,13 @@ export default function UsersTable({
       },
       render: (_: any, record: User): JSX.Element => {
         return (
-          <div>
-            <Typography.Title level={5}>
-              {record.first_name} {record.last_name}
-            </Typography.Title>
-          </div>
+          record.dates[0] && (
+            <div>
+              <Typography.Title level={5}>
+                {record.first_name} {record.last_name}
+              </Typography.Title>
+            </div>
+          )
         );
       }
     },
