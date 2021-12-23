@@ -1,4 +1,11 @@
-import React, { useCallback, useEffect, Dispatch, SetStateAction } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, {
+  useCallback,
+  useEffect,
+  Dispatch,
+  SetStateAction,
+  useState
+} from 'react';
 import { axiosApiInstance } from 'api/axios';
 import { User } from 'redux/reducers/types';
 import { Table, Input, Typography } from 'antd';
@@ -15,6 +22,7 @@ export default function UsersTable({
   searchData,
   setSearchData
 }: Props): JSX.Element {
+  const [value, setValue] = useState('');
   const fetchData = useCallback(async () => {
     try {
       const { data } = await axiosApiInstance.get('users');
@@ -26,21 +34,15 @@ export default function UsersTable({
 
   useEffect(() => {
     fetchData();
-  }, [fetchData]);
+  }, []);
 
-  const onFilterContacts = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.currentTarget.value) {
-      const normalizeFilter = e.currentTarget.value.toLowerCase();
-      const filterValue = searchData.filter(
+  const filtered = !value
+    ? searchData
+    : searchData.filter(
         ({ first_name, last_name }) =>
-          first_name.toLowerCase().includes(normalizeFilter) ||
-          last_name.toLowerCase().includes(normalizeFilter)
+          first_name.toLowerCase().includes(value.toLowerCase()) ||
+          last_name.toLowerCase().includes(value.toLowerCase())
       );
-      setSearchData(filterValue);
-    } else {
-      fetchData();
-    }
-  };
 
   const columns = [
     {
@@ -53,7 +55,8 @@ export default function UsersTable({
         return (
           <Input
             type="text"
-            onChange={onFilterContacts}
+            value={value}
+            onChange={e => setValue(e.currentTarget.value)}
             placeholder="Search..."
           />
         );
@@ -139,7 +142,7 @@ export default function UsersTable({
     <Table
       rowKey={record => record.id}
       columns={columns}
-      dataSource={searchData}
+      dataSource={filtered}
     />
   );
 }
