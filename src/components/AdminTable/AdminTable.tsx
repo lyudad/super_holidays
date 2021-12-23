@@ -11,7 +11,6 @@ import { User } from 'redux/reducers/types';
 import { Table, Input, Typography } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import ChoseStatus from './choseStatus';
-import { nanoid } from 'nanoid';
 
 interface Props {
   searchData: User[];
@@ -22,7 +21,7 @@ export default function UsersTable({
   searchData,
   setSearchData
 }: Props): JSX.Element {
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState<string>('');
   const fetchData = useCallback(async () => {
     try {
       const { data } = await axiosApiInstance.get('users');
@@ -78,19 +77,17 @@ export default function UsersTable({
       dataIndex: 'dates',
       render: (_: any, record: User): JSX.Element => {
         return (
-          record.dates[0] && (
-            <>
-              {record.dates.map(e => {
-                return (
-                  <div key={nanoid()}>
-                    <Typography.Title level={5}>
-                      {e.start_day} - {e.end_day}
-                    </Typography.Title>
-                  </div>
-                );
-              })}
-            </>
-          )
+          <>
+            {record?.dates?.map(e => {
+              return (
+                <div key={e.id}>
+                  <Typography.Title level={5}>
+                    {e.start_day} - {e.end_day}
+                  </Typography.Title>
+                </div>
+              );
+            })}
+          </>
         );
       }
     },
@@ -102,7 +99,7 @@ export default function UsersTable({
           <>
             {record?.dates?.map(e => {
               return (
-                <div key={nanoid()}>
+                <div key={e.id}>
                   <Typography.Title level={5}>{e.type}</Typography.Title>
                 </div>
               );
@@ -116,21 +113,19 @@ export default function UsersTable({
       dataIndex: 'status',
       render: (_: any, record: User): JSX.Element => {
         return (
-          record.dates[0] && (
-            <>
-              {record.dates.map(e => {
-                return (
-                  <div key={nanoid()}>
-                    <ChoseStatus
-                      fetchData={fetchData}
-                      id={e.id}
-                      type={e.status}
-                    />
-                  </div>
-                );
-              })}
-            </>
-          )
+          <>
+            {record?.dates?.map(e => {
+              return (
+                <div key={e.id}>
+                  <ChoseStatus
+                    fetchData={fetchData}
+                    id={e.id}
+                    type={e.status}
+                  />
+                </div>
+              );
+            })}
+          </>
         );
       }
     }

@@ -6,9 +6,10 @@ import { Button } from 'antd';
 import { LogoutOutlined } from '@ant-design/icons';
 import { eng } from 'helpers/eng';
 import { onLogout } from 'redux/reducers/action-creators';
+import { defaultPass } from 'helpers/constants';
 
 export default function Menu(): JSX.Element {
-  const [selectedKey, setSelectedKey] = useState<string>('0');
+  const [selectedKey, setSelectedKey] = useState<string>(defaultPass.dashboard);
   const dispatch = useDispatch();
   const { update } = useContext(TextContext);
   const changeSelectedKey = (event: any) => {
