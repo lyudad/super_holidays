@@ -6,6 +6,7 @@ import React, {
   SetStateAction,
   useState
 } from 'react';
+import axios from 'axios';
 import { axiosApiInstance } from 'api/axios';
 import { User } from 'redux/reducers/types';
 import { Table, Input, Typography } from 'antd';
@@ -32,7 +33,9 @@ export default function UsersTable({
   }, [setSearchData]);
 
   useEffect(() => {
+    const source = axios.CancelToken.source();
     fetchData();
+    return source.cancel();
   }, []);
 
   const filtered = !value
