@@ -99,17 +99,15 @@ export default function UsersTable({
       dataIndex: 'type',
       render: (_: any, record: User): JSX.Element => {
         return (
-          record.dates[0] && (
-            <>
-              {record.dates.map(e => {
-                return (
-                  <div key={nanoid()}>
-                    <Typography.Title level={5}>{e.type}</Typography.Title>
-                  </div>
-                );
-              })}
-            </>
-          )
+          <>
+            {record?.dates?.map(e => {
+              return (
+                <div key={nanoid()}>
+                  <Typography.Title level={5}>{e.type}</Typography.Title>
+                </div>
+              );
+            })}
+          </>
         );
       }
     },
