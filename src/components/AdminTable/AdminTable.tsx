@@ -23,10 +23,12 @@ export default function UsersTable({
   setSearchData
 }: Props): JSX.Element {
   const [value, setValue] = useState<string>('');
+  const [filtered, setFiltered] = useState<User[]>([]);
   const fetchData = useCallback(async () => {
     try {
       const { data } = await axiosApiInstance.get('users');
       setSearchData(data);
+      setFiltered(data);
     } catch (e) {
       console.log(e);
     }
@@ -38,13 +40,20 @@ export default function UsersTable({
     return source.cancel();
   }, []);
 
-  const filtered = !value
-    ? searchData
-    : searchData.filter(
+  const onFilter = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(e.currentTarget.value);
+    if (e.currentTarget.value) {
+      const normalizeFilter = e.currentTarget.value.toLowerCase();
+      const filterValue = searchData.filter(
         ({ first_name, last_name }) =>
-          first_name.toLowerCase().includes(value.toLowerCase()) ||
-          last_name.toLowerCase().includes(value.toLowerCase())
+          first_name.toLowerCase().includes(normalizeFilter) ||
+          last_name.toLowerCase().includes(normalizeFilter)
       );
+      setFiltered(filterValue);
+    } else {
+      setFiltered(searchData);
+    }
+  };
 
   const columns = [
     {
@@ -58,7 +67,7 @@ export default function UsersTable({
           <Input
             type="text"
             value={value}
-            onChange={e => setValue(e.currentTarget.value)}
+            onChange={e => onFilter(e)}
             placeholder="Search..."
           />
         );
