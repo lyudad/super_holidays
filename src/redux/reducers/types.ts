@@ -9,6 +9,7 @@ export interface User {
   isBlocked: boolean;
   vacation: number;
   sick_leaves: number;
+  dates: TypeUserDates[];
 }
 
 export type Token = string;
@@ -27,10 +28,23 @@ export interface TypeUserState {
   error: string | null;
 }
 
+export enum VacationType {
+  SICK_LEAVE = 'sick leave',
+  VACATION = 'vacation',
+  OWN_EXPENSE = 'own expense'
+}
+
+export enum Status {
+  PENDING = 'pending',
+  APPROVED = 'approved',
+  REJECTED = 'rejected'
+}
+
 export interface TypeUserDates {
-  start_day: string;
-  end_day: string;
-  type: string;
-  status: string;
+  id: number;
+  start_day: Date;
+  end_day: Date;
+  type: VacationType;
+  status: Status;
   userId: number;
 }
