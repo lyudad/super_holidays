@@ -6,7 +6,6 @@ import React, {
   SetStateAction,
   useState
 } from 'react';
-import axios from 'axios';
 import { axiosApiInstance } from 'api/axios';
 import { User } from 'redux/reducers/types';
 import { Table, Input, Typography } from 'antd';
@@ -24,20 +23,24 @@ export default function UsersTable({
 }: Props): JSX.Element {
   const [value, setValue] = useState<string>('');
   const [filtered, setFiltered] = useState<User[]>([]);
+  let canceled = false;
   const fetchData = useCallback(async () => {
     try {
       const { data } = await axiosApiInstance.get('users');
-      setSearchData(data);
-      setFiltered(data);
+      if (!canceled) {
+        setSearchData(data);
+        setFiltered(data);
+      }
     } catch (e) {
       console.log(e);
     }
   }, [setSearchData]);
 
   useEffect(() => {
-    const source = axios.CancelToken.source();
     fetchData();
-    return source.cancel();
+    return () => {
+      canceled = true;
+    };
   }, []);
 
   const onFilter = (e: React.ChangeEvent<HTMLInputElement>) => {
