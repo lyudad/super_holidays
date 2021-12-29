@@ -1,75 +1,34 @@
 import { useState } from 'react';
-import { Data } from './types';
+import { TypeUserDates } from 'redux/reducers/types';
 import { FIRST_PAGE, PAGE_SIZE } from './const';
-
 import { Table } from 'antd';
 
-const dataExample = [
-  {
-    key: '1',
-    month: 'July 2021',
-    dates: '10-20',
-    status: 'Pending',
-    type: 'vacation'
-  },
-  {
-    key: '2',
-    month: 'April 2021',
-    dates: '8',
-    status: 'Pending',
-    type: 'vacation'
-  },
-  {
-    key: '3',
-    month: 'May 2021',
-    dates: '12-13',
-    status: 'Pending',
-    type: 'sick leave'
-  },
-  {
-    key: '4',
-    month: 'September 2021',
-    dates: '11-18',
-    status: 'Pending',
-    type: 'vacation'
-  },
-  {
-    key: '5',
-    month: 'Fabruary 2021',
-    dates: '5',
-    status: 'Pending',
-    type: 'sick leave'
-  },
-  {
-    key: '6',
-    month: 'March 2021',
-    dates: '15-16',
-    status: 'Pending',
-    type: 'sick leave'
-  }
-];
+interface Props {
+  dates: TypeUserDates[] | undefined;
+}
 
-export default function ProfileTable(): JSX.Element {
-  const [data] = useState<Data[]>(dataExample);
+export default function ProfileTable(props: Props): JSX.Element {
   const [page] = useState<number>(FIRST_PAGE);
   const [pageSize] = useState<number>(PAGE_SIZE);
 
   const columns = [
     {
       key: '1',
-      title: 'month',
-      dataIndex: 'month'
-    },
-    {
-      key: '2',
-      title: 'dates',
-      dataIndex: 'dates'
+      title: 'Dates',
+      dataIndex: 'dates',
+      render: (_: any, e: TypeUserDates): JSX.Element => {
+        return (
+          <p>
+            {e.start_day} - {e.end_day}{' '}
+          </p>
+        );
+      }
     },
     {
       key: '3',
       title: 'status',
       dataIndex: 'approved',
-      render: (approved: boolean) => {
+      render: (approved: boolean): JSX.Element => {
         return <p>{approved ? 'approve' : 'pending'}</p>;
       }
     },
@@ -79,11 +38,13 @@ export default function ProfileTable(): JSX.Element {
       dataIndex: 'type'
     }
   ];
+
   return (
     <div className="table">
       <Table
+        rowKey={record => record.id}
         columns={columns}
-        dataSource={data}
+        dataSource={props?.dates?.reverse()}
         pagination={{
           current: page,
           pageSize: pageSize
