@@ -1,5 +1,5 @@
 import ProfileTable from 'components/ProfileTable';
-import Modal from 'components/Modal';
+import Calendar from 'components/Calendar';
 import { Row } from 'antd';
 import { StyledContent, StyledLayout } from 'pages/ProfileView/styles';
 import { User } from 'redux/reducers/types';
@@ -7,6 +7,7 @@ import { User } from 'redux/reducers/types';
 interface Props {
   user: User | null;
 }
+const date = new Date();
 
 export default function EditView({ user }: Props): JSX.Element {
   return (
@@ -25,9 +26,9 @@ export default function EditView({ user }: Props): JSX.Element {
           <p style={{ fontSize: '20px' }}>{user?.vacation} vacation days</p>
         </Row>
         <Row justify="end" style={{ marginBottom: '30px' }}>
-          <Modal />
+          <Calendar dayToDay={date} />
         </Row>
-        <ProfileTable />
+        <ProfileTable dates={user?.dates} />
       </StyledContent>
     </StyledLayout>
   );
