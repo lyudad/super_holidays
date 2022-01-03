@@ -41,7 +41,7 @@ export default function ProfileView(): JSX.Element {
             {user?.total_sick_leaves} sick leaves
           </p>
           <p style={{ fontSize: '20px' }}>
-            {user?.total_vacation} vacation days
+            {user?.total_vacations} vacation days
           </p>
         </Row>
         <Row justify="end" style={{ marginBottom: '30px' }}>
