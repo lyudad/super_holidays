@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, Dispatch, SetStateAction } from 'react';
 import { useSelector } from 'react-redux';
 import selectors from 'redux/selectors';
 import { axiosApiInstance } from 'api/axios';
@@ -8,9 +8,11 @@ import { InputWrapper, WrapperButton } from './styles';
 import { eng } from 'helpers/eng';
 import 'react-calendar/dist/Calendar.css';
 import './calendar.css';
+import { TypeUserDates } from 'redux/reducers/types';
 
 interface DataPickerProps {
   dayToDay: Date;
+  setDates?: Dispatch<SetStateAction<TypeUserDates[]>>;
 }
 interface OnSubmit {
   start_day: Date;
@@ -34,7 +36,10 @@ export enum VacationType {
 
 type Visible = boolean;
 
-export default function DataPicker({ dayToDay }: DataPickerProps): JSX.Element {
+export default function DataPicker({
+  dayToDay,
+  setDates
+}: DataPickerProps): JSX.Element {
   const stateUser = useSelector(selectors.getUser);
 
   const [line, setLine] = useState<Date[]>([]);
@@ -53,7 +58,13 @@ export default function DataPicker({ dayToDay }: DataPickerProps): JSX.Element {
   };
   const createBook = async (event: OnSubmit) => {
     try {
-      await axiosApiInstance.post(`booking`, event);
+      const { data } = await axiosApiInstance.post(`booking`, event);
+
+      if (setDates) {
+        setDates(prev => {
+          return [data, ...prev];
+        });
+      }
     } catch (e) {
       console.log(e);
     }

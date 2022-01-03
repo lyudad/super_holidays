@@ -10,6 +10,7 @@ interface Props {
 const date = new Date();
 
 export default function EditView({ user }: Props): JSX.Element {
+  console.log(user);
   return (
     <StyledLayout>
       <StyledContent>
@@ -21,9 +22,11 @@ export default function EditView({ user }: Props): JSX.Element {
         </Row>
         <Row style={{ marginBottom: '30px' }}>
           <p style={{ fontSize: '20px', marginRight: '50px' }}>
-            {user?.sick_leaves} sick leaves
+            {user?.total_sick_leaves} sick leaves
           </p>
-          <p style={{ fontSize: '20px' }}>{user?.vacation} vacation days</p>
+          <p style={{ fontSize: '20px' }}>
+            {user?.total_vacation} vacation days
+          </p>
         </Row>
         <Row justify="end" style={{ marginBottom: '30px' }}>
           <Calendar dayToDay={date} />
