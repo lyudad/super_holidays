@@ -1,13 +1,31 @@
 import { useSelector } from 'react-redux';
 import selectors from 'redux/selectors';
 import ProfileTable from 'components/ProfileTable';
-import Modal from 'components/Modal';
+import Calendar from 'components/Calendar';
 import { Row } from 'antd';
-
+import { useState, useCallback, useEffect } from 'react';
+import { axiosApiInstance } from 'api/axios';
 import { StyledContent, StyledLayout } from './styles';
+import { TypeUserDates } from 'redux/reducers/types';
+
+const date: Date = new Date();
 
 export default function ProfileView(): JSX.Element {
+  const [dates, setDates] = useState<TypeUserDates[]>([]);
   const user = useSelector(selectors.getUser);
+
+  const fetchData = useCallback(async () => {
+    try {
+      const { data } = await axiosApiInstance.get(`booking/${user?.id}`);
+      setDates(data);
+    } catch (e) {
+      console.log(e);
+    }
+  }, [user?.id]);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData, dates]);
   return (
     <StyledLayout>
       <StyledContent>
@@ -24,9 +42,9 @@ export default function ProfileView(): JSX.Element {
           <p style={{ fontSize: '20px' }}>{user?.vacation} vacation days</p>
         </Row>
         <Row justify="end" style={{ marginBottom: '30px' }}>
-          <Modal />
+          <Calendar dayToDay={date} />
         </Row>
-        <ProfileTable />
+        <ProfileTable dates={dates} />
       </StyledContent>
     </StyledLayout>
   );
