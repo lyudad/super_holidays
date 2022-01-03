@@ -7,11 +7,17 @@ import { SearchOutlined } from '@ant-design/icons';
 interface Props {
   searchData: User[];
   setSearchData: Dispatch<SetStateAction<User[]>>;
+  edit: boolean;
+  setEdit: Dispatch<SetStateAction<boolean>>;
+  setUser: Dispatch<SetStateAction<User | null>>;
 }
 
 export default function UsersTable({
   searchData,
-  setSearchData
+  setSearchData,
+  edit,
+  setEdit,
+  setUser
 }: Props): JSX.Element {
   const fetchData = useCallback(async () => {
     try {
@@ -91,7 +97,18 @@ export default function UsersTable({
       title: 'Action',
       dataIndex: 'key',
       key: 'x',
-      render: () => <a>Edit</a>
+      render: (_: any, record: User): JSX.Element => {
+        return (
+          <a
+            onClick={() => {
+              setEdit(!edit);
+              setUser(record);
+            }}
+          >
+            edit
+          </a>
+        );
+      }
     }
   ];
 
