@@ -8,7 +8,7 @@ interface Props {
 }
 
 export default function ProfileTable(props: Props): JSX.Element {
-  const [page] = useState<number>(FIRST_PAGE);
+  const [page, setPage] = useState<number>(FIRST_PAGE);
   const [pageSize] = useState<number>(PAGE_SIZE);
 
   const columns = [
@@ -47,7 +47,10 @@ export default function ProfileTable(props: Props): JSX.Element {
         dataSource={props?.dates?.reverse()}
         pagination={{
           current: page,
-          pageSize: pageSize
+          pageSize: pageSize,
+          onChange: e => {
+            setPage(e);
+          }
         }}
       ></Table>
     </div>
