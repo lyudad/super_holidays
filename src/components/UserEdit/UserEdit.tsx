@@ -39,6 +39,9 @@ export default function EditView({ user, setEdit }: Props): JSX.Element {
             {user?.last_name}
           </h1>
         </Row>
+        <Row>
+          <h1 style={{ fontSize: '25px' }}>{user?.email}</h1>
+        </Row>
         <Row style={{ marginBottom: '30px' }}>
           <p style={{ fontSize: '20px', marginRight: '50px' }}>
             {user?.total_sick_leaves} sick leaves
@@ -49,9 +52,16 @@ export default function EditView({ user, setEdit }: Props): JSX.Element {
         </Row>
         <Row>
           <Button onClick={() => setEdit(false)}>Go Back</Button>
-          <Button onClick={onSendPass}>Send Password</Button>
         </Row>
         <Row justify="end" style={{ marginBottom: '30px' }}>
+          <Button
+            style={{ marginRight: 20 }}
+            type="primary"
+            danger
+            onClick={onSendPass}
+          >
+            Send Password
+          </Button>
           <Calendar dayToDay={date} setDates={setDates} id={user?.id} />
         </Row>
         <ProfileTable dates={dates} />
