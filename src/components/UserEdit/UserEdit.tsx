@@ -6,6 +6,7 @@ import { StyledContent, StyledLayout } from 'pages/ProfileView/styles';
 import { TypeUserDates, User } from 'redux/reducers/types';
 import ProfileTable from 'components/ProfileTable';
 import Calendar from 'components/Calendar';
+import Notification from 'components/Notification';
 
 interface Props {
   user: User | null;
@@ -21,8 +22,20 @@ export default function EditView({ user, setEdit }: Props): JSX.Element {
         name: `${user?.first_name}  ${user?.last_name}`,
         email: user?.email
       });
+      Notification.openNotificationWithIcon(Notification.Not.success);
+    } catch (e) {
+      Notification.openNotificationWithIcon(Notification.Not.error);
+      console.log(e);
+    }
+  };
+  const onDeleteUser = async () => {
+    try {
+      await axiosApiInstance.delete(`users/${user?.id}`);
+      setEdit(false);
+      Notification.openNotificationWithIcon(Notification.Not.success);
     } catch (e) {
       console.log(e);
+      Notification.openNotificationWithIcon(Notification.Not.error);
     }
   };
   useEffect(() => {
@@ -54,12 +67,10 @@ export default function EditView({ user, setEdit }: Props): JSX.Element {
           <Button onClick={() => setEdit(false)}>Go Back</Button>
         </Row>
         <Row justify="end" style={{ marginBottom: '30px' }}>
-          <Button
-            style={{ marginRight: 20 }}
-            type="primary"
-            danger
-            onClick={onSendPass}
-          >
+          <Button danger style={{ marginRight: 100 }} onClick={onDeleteUser}>
+            Delete User
+          </Button>
+          <Button style={{ marginRight: 100 }} onClick={onSendPass}>
             Send Password
           </Button>
           <Calendar dayToDay={date} setDates={setDates} id={user?.id} />

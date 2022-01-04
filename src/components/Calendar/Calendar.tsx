@@ -7,6 +7,7 @@ import { eng } from 'helpers/eng';
 import 'react-calendar/dist/Calendar.css';
 import './calendar.css';
 import { TypeUserDates } from 'redux/reducers/types';
+import Notification from 'components/Notification';
 
 interface DataPickerProps {
   dayToDay: Date;
@@ -63,8 +64,10 @@ export default function DataPicker({
           return [data, ...prev];
         });
       }
+      Notification.openNotificationWithIcon(Notification.Not.success);
     } catch (e) {
       console.log(e);
+      Notification.openNotificationWithIcon(Notification.Not.error);
     }
   };
   async function onSubmitCalendar() {

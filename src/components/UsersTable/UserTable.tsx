@@ -9,6 +9,7 @@ import { axiosApiInstance } from 'api/axios';
 import { User } from 'redux/reducers/types';
 import { Button, Table, Input } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
+import Notification from 'components/Notification';
 
 interface Props {
   searchData: User[];
@@ -32,6 +33,7 @@ export default function UsersTable({
       const { data } = await axiosApiInstance.get('users');
       setSearchData(data);
     } catch (e) {
+      Notification.openNotificationWithIcon(Notification.Not.error);
       console.log(e);
     }
   }, [setSearchData]);
@@ -58,8 +60,10 @@ export default function UsersTable({
     try {
       await axiosApiInstance.patch(`users/${id}/block`, { isBlocked: status });
       await fetchData();
+      Notification.openNotificationWithIcon(Notification.Not.success);
     } catch (e) {
       console.log(e);
+      Notification.openNotificationWithIcon(Notification.Not.error);
     }
   };
 
@@ -124,7 +128,7 @@ export default function UsersTable({
     <Table
       rowKey={record => record.id}
       columns={columns}
-      dataSource={searchData}
+      dataSource={searchData.reverse()}
       pagination={{
         current: page,
         pageSize: 5,
