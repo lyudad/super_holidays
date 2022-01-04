@@ -48,8 +48,7 @@ export default function EditView({ user, setEdit }: Props): JSX.Element {
       <StyledContent>
         <Row style={{ marginBottom: '30px' }}>
           <h1 style={{ fontSize: '25px' }}>
-            {user?.first_name}
-            {user?.last_name}
+            {user?.first_name}-{user?.last_name}
           </h1>
         </Row>
         <Row>
