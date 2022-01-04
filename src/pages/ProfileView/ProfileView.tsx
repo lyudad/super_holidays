@@ -45,7 +45,7 @@ export default function ProfileView(): JSX.Element {
           </p>
         </Row>
         <Row justify="end" style={{ marginBottom: '30px' }}>
-          <Calendar dayToDay={date} setDates={setDates} />
+          <Calendar dayToDay={date} setDates={setDates} id={user?.id} />
         </Row>
         <ProfileTable dates={dates} />
       </StyledContent>

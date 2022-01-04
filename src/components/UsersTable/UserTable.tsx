@@ -1,4 +1,10 @@
-import React, { useCallback, useEffect, Dispatch, SetStateAction } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  Dispatch,
+  SetStateAction,
+  useState
+} from 'react';
 import { axiosApiInstance } from 'api/axios';
 import { User } from 'redux/reducers/types';
 import { Button, Table, Input } from 'antd';
@@ -19,6 +25,8 @@ export default function UsersTable({
   setEdit,
   setUser
 }: Props): JSX.Element {
+  const [page, setPage] = useState<number>(1);
+
   const fetchData = useCallback(async () => {
     try {
       const { data } = await axiosApiInstance.get('users');
@@ -117,6 +125,13 @@ export default function UsersTable({
       rowKey={record => record.id}
       columns={columns}
       dataSource={searchData}
+      pagination={{
+        current: page,
+        pageSize: 5,
+        onChange: e => {
+          setPage(e);
+        }
+      }}
     />
   );
 }

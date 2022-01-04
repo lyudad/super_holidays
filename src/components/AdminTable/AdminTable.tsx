@@ -21,6 +21,7 @@ export default function UsersTable({
   searchData,
   setSearchData
 }: Props): JSX.Element {
+  const [page, setPage] = useState<number>(1);
   const [value, setValue] = useState<string>('');
   const [filtered, setFiltered] = useState<User[]>([]);
   let canceled = false;
@@ -97,7 +98,8 @@ export default function UsersTable({
               return (
                 <div key={e.id}>
                   <Typography.Title level={5}>
-                    {e.start_day} - {e.end_day}
+                    {e.start_day.toString().split(':')[0].slice(0, 10)} -{' '}
+                    {e.end_day.toString().split(':')[0].slice(0, 10)}{' '}
                   </Typography.Title>
                 </div>
               );
@@ -151,6 +153,13 @@ export default function UsersTable({
       rowKey={record => record.id}
       columns={columns}
       dataSource={filtered}
+      pagination={{
+        current: page,
+        pageSize: 5,
+        onChange: e => {
+          setPage(e);
+        }
+      }}
     />
   );
 }

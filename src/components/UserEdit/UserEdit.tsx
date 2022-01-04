@@ -1,16 +1,20 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useState, useEffect, Dispatch, SetStateAction } from 'react';
 import { Row, Button } from 'antd';
 import { axiosApiInstance } from 'api/axios';
 import { StyledContent, StyledLayout } from 'pages/ProfileView/styles';
-import { User } from 'redux/reducers/types';
+import { TypeUserDates, User } from 'redux/reducers/types';
 import ProfileTable from 'components/ProfileTable';
 import Calendar from 'components/Calendar';
 
 interface Props {
   user: User | null;
+  setEdit: Dispatch<SetStateAction<boolean>>;
 }
 const date = new Date();
 
-export default function EditView({ user }: Props): JSX.Element {
+export default function EditView({ user, setEdit }: Props): JSX.Element {
+  const [dates, setDates] = useState<TypeUserDates[]>([]);
   const onSendPass = async () => {
     try {
       await axiosApiInstance.post('mail', {
@@ -21,6 +25,11 @@ export default function EditView({ user }: Props): JSX.Element {
       console.log(e);
     }
   };
+  useEffect(() => {
+    if (user?.dates) {
+      setDates(user?.dates);
+    }
+  }, []);
   return (
     <StyledLayout>
       <StyledContent>
@@ -39,12 +48,13 @@ export default function EditView({ user }: Props): JSX.Element {
           </p>
         </Row>
         <Row>
+          <Button onClick={() => setEdit(false)}>Go Back</Button>
           <Button onClick={onSendPass}>Send Password</Button>
         </Row>
         <Row justify="end" style={{ marginBottom: '30px' }}>
-          <Calendar dayToDay={date} />
+          <Calendar dayToDay={date} setDates={setDates} id={user?.id} />
         </Row>
-        <ProfileTable dates={user?.dates} />
+        <ProfileTable dates={dates} />
       </StyledContent>
     </StyledLayout>
   );

@@ -1,6 +1,4 @@
 import { useState, Dispatch, SetStateAction } from 'react';
-import { useSelector } from 'react-redux';
-import selectors from 'redux/selectors';
 import { axiosApiInstance } from 'api/axios';
 import Calendar from 'react-calendar';
 import { Select, Modal } from 'antd';
@@ -13,13 +11,14 @@ import { TypeUserDates } from 'redux/reducers/types';
 interface DataPickerProps {
   dayToDay: Date;
   setDates?: Dispatch<SetStateAction<TypeUserDates[]>>;
+  id: number | undefined;
 }
 interface OnSubmit {
   start_day: Date;
   end_day: Date;
   type: string;
   status: string;
-  userId: number | null;
+  userId: number | undefined;
 }
 
 export enum Status {
@@ -38,10 +37,9 @@ type Visible = boolean;
 
 export default function DataPicker({
   dayToDay,
-  setDates
+  setDates,
+  id
 }: DataPickerProps): JSX.Element {
-  const stateUser = useSelector(selectors.getUser);
-
   const [line, setLine] = useState<Date[]>([]);
   const [value, setValue] = useState<string>(VacationType.VACATION);
   const [isModalVisible, setIsModalVisible] = useState<Visible>(false);
@@ -80,11 +78,11 @@ export default function DataPicker({
     }
 
     const event: OnSubmit = {
-      start_day: line[0],
+      start_day: new Date(line[0].setHours(line[0].getHours() + 5)),
       end_day: line[1],
       type: value,
       status: Status.PENDING,
-      userId: stateUser && stateUser.id
+      userId: id
     };
     await createBook(event);
   }
