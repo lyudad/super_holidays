@@ -29,7 +29,9 @@ export default function Menu(): JSX.Element {
       <Button
         onClick={() => {
           dispatch(onLogout());
-          history.push('/');
+          setTimeout(() => {
+            history.push('/');
+          }, 400);
         }}
       >
         {eng.button_logOut} <LogoutOutlined />
