@@ -67,7 +67,7 @@ export default function UserForm({ setSearchData }: Props): JSX.Element {
             defaultValue="user"
             value={value}
             onChange={e => setValue(e)}
-            style={{ width: '30%' }}
+            style={{ width: '40%' }}
           >
             <Select.Option value={accessUser.employee}>
               {' '}
